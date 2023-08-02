@@ -1,5 +1,5 @@
 // Todo componente começa com letra maisucula como o nome do arquivo 
-import Frase from "./File"
+import Frase from "./Frase"
 
 function HelloWorld() {
     return (
