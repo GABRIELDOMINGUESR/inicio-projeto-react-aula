@@ -54,7 +54,9 @@ function App() {
       <Evento numero='1'/>
       <Evento numero='2'/> */}
 
-      <Form/>
+      {/* <Form/> */}
+      <h1>TEstando Evento</h1>
+      <Evento numero= "1"/>
     </div>
   );
 }
