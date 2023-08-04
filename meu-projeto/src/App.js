@@ -1,6 +1,6 @@
 // importacoes
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import HelloWorld from './components/HelloWorld';
 import Button from './components/Button';
 import SayMyName from './components/SayMyName';
@@ -11,6 +11,7 @@ import Item from './components/Item'
 import Evento from './components/Evento'
 import Form from './components/Form'
 import Condicional from './components/Condicional';
+import OutraLista from './components/OutraLista';
 
 function App() {
   //aqui ficarao as criações das variaaveis
@@ -24,9 +25,21 @@ function App() {
   // const url = 'https://s2-techtudo.glbimg.com/Bxr-QA4_gL25CarCCxr9JQFybt8=/0x0:1024x609/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2022/c/u/15eppqSmeTdHkoAKM0Uw/dall-e-2.jpg';
   // const nome = "Lara"
 
+  const meusItens = ['react','Vue','Angular']
+  
   return (
     // class é uma palavra reservada eintao className
-    <div className="App">
+    <div className="App"
+    style={{
+      // backgroundColor:'red',
+      display:'flex',
+      height:'100vh',
+      width:'100%',
+      alignItems:'center',
+      flexDirection:'column'
+    }}
+    >
+      
 
       {/* <h1>Olá react</h1> */}
       {/* <h1>Alterando JSX </h1>
@@ -59,9 +72,11 @@ function App() {
       {/* <h1>TEstando Evento</h1>
       <Evento numero= "1"/> */}
 
-      <h1>Redenzizaçao condicional</h1>
-      <Condicional />
-
+      {/* <h1>Redenzizaçao condicional</h1>
+      <Condicional /> */}
+      <h1>Renderização de lista</h1>
+      <OutraLista itens= {meusItens}/>
+      <OutraLista itens = {[]}/>
     </div>
   );
 }
