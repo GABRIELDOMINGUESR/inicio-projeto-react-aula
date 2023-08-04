@@ -12,7 +12,9 @@ import Evento from './components/Evento'
 import Form from './components/Form'
 import Condicional from './components/Condicional';
 import OutraLista from './components/OutraLista';
-
+import {useState} from 'react'
+import SeuNome from './components/SeuNome';
+import Saudacao from './components/Saudacao';
 function App() {
   //aqui ficarao as criações das variaaveis
 
@@ -27,6 +29,8 @@ function App() {
 
   const meusItens = ['react','Vue','Angular']
   
+
+  const [nome, setNome] = useState()
   return (
     // class é uma palavra reservada eintao className
     <div className="App"
@@ -74,9 +78,15 @@ function App() {
 
       {/* <h1>Redenzizaçao condicional</h1>
       <Condicional /> */}
-      <h1>Renderização de lista</h1>
+      {/* <h1>Renderização de lista</h1>
       <OutraLista itens= {meusItens}/>
-      <OutraLista itens = {[]}/>
+      <OutraLista itens = {[]}/> */}
+
+
+      <h1>State life</h1>
+      <SeuNome setNome = {setNome}/>
+      {nome}
+      <Saudacao nome={nome}/>
     </div>
   );
 }
