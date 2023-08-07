@@ -15,6 +15,16 @@ import OutraLista from './components/OutraLista';
 import {useState} from 'react'
 import SeuNome from './components/SeuNome';
 import Saudacao from './components/Saudacao';
+import Footer from './components/layout/Footer';
+
+// router
+
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Contato from './pages/Contato';
+import Empresa from './pages/Empresa';
+import Navibar from './components/layout/Navibar';
+
 function App() {
   //aqui ficarao as criações das variaaveis
 
@@ -83,10 +93,20 @@ function App() {
       <OutraLista itens = {[]}/> */}
 
 
-      <h1>State life</h1>
+      {/* <h1>State life</h1>
       <SeuNome setNome = {setNome}/>
       {nome}
-      <Saudacao nome={nome}/>
+      <Saudacao nome={nome}/> */}
+   <Router>
+      <Navibar/>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/contato" element={<Contato />} />
+        <Route path="/empresa" element={<Empresa />} />
+      </Routes>
+      <Footer/> 
+    </Router>
+
     </div>
   );
 }
