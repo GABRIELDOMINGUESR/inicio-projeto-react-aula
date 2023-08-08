@@ -4,16 +4,12 @@ import Company from './components/pages/Company'
 import Contact from './components/pages/Contact'
 import NewProject from './components/pages/NewProjects'
 import Container from './components/layout/Container'
+import Navibar from "./components/layout/Navibar";
 
 function App() {
   return (
     <Router>
-      <div>
-       <Link to="/">Home</Link>
-       <Link to="/contact">Contato</Link>
-       <Link to="/company">Empresa</Link>
-       <Link to="/newproject">Novo Projeto</Link>
-      </div>
+      <Navibar/>
       <Container customClass='min-height'>   
       <Routes>
 
