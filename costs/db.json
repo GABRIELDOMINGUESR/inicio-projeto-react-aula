@@ -1,0 +1,25 @@
+{
+  "__comments": {
+    "description": "Este arquivo representa um banco de dados simulado para a entidade 'projects'."
+  },
+
+  "projects": [],
+  "category": [
+    {
+      "id": 1,
+      "name": "Ifra"
+    },
+    {
+        "id": 2,
+        "name": "Desenvolvimento"
+      },
+      {
+        "id": 3,
+        "name": "Design"
+      },
+      {
+        "id": 4,
+        "name": "Planejamento"
+      }
+  ]
+}
