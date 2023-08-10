@@ -2,24 +2,84 @@
   "__comments": {
     "description": "Este arquivo representa um banco de dados simulado para a entidade 'projects'."
   },
-
-  "projects": [],
+  "projects": [
+    {
+      "name": "test",
+      "budget": "3.000",
+      "categories": {
+        "id": "4",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 1
+    },
+    {
+      "name": "test",
+      "budget": "3.000",
+      "categories": {
+        "id": "4",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 2
+    },
+    {
+      "name": "test",
+      "budget": "3.000",
+      "categories": {
+        "id": "4",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 3
+    },
+    {
+      "name": "test",
+      "budget": "3.000",
+      "categories": {
+        "id": "4",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 4
+    },
+    {
+      "name": "test",
+      "budget": "3.000",
+      "categories": {
+        "id": "4",
+        "name": "Planejamento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 5
+    },
+    {
+      "cost": 0,
+      "services": [],
+      "id": 6
+    }
+  ],
   "category": [
     {
       "id": 1,
       "name": "Ifra"
     },
     {
-        "id": 2,
-        "name": "Desenvolvimento"
-      },
-      {
-        "id": 3,
-        "name": "Design"
-      },
-      {
-        "id": 4,
-        "name": "Planejamento"
-      }
+      "id": 2,
+      "name": "Desenvolvimento"
+    },
+    {
+      "id": 3,
+      "name": "Design"
+    },
+    {
+      "id": 4,
+      "name": "Planejamento"
+    }
   ]
 }
