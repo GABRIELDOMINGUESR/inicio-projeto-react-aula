@@ -24,6 +24,17 @@
       "cost": 0,
       "services": [],
       "id": 2
+    },
+    {
+      "name": "opa",
+      "budget": "56",
+      "categories": {
+        "id": "2",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 3
     }
   ],
   "category": [
