@@ -4,64 +4,26 @@
   },
   "projects": [
     {
-      "name": "test",
-      "budget": "3.000",
+      "name": "vai",
+      "budget": "444",
       "categories": {
-        "id": "4",
-        "name": "Planejamento"
+        "id": "1",
+        "name": "Ifra"
       },
       "cost": 0,
       "services": [],
       "id": 1
     },
     {
-      "name": "test",
-      "budget": "3.000",
+      "name": "4",
+      "budget": "444",
       "categories": {
-        "id": "4",
-        "name": "Planejamento"
+        "id": "1",
+        "name": "Ifra"
       },
       "cost": 0,
       "services": [],
       "id": 2
-    },
-    {
-      "name": "test",
-      "budget": "3.000",
-      "categories": {
-        "id": "4",
-        "name": "Planejamento"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 3
-    },
-    {
-      "name": "test",
-      "budget": "3.000",
-      "categories": {
-        "id": "4",
-        "name": "Planejamento"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 4
-    },
-    {
-      "name": "test",
-      "budget": "3.000",
-      "categories": {
-        "id": "4",
-        "name": "Planejamento"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 5
-    },
-    {
-      "cost": 0,
-      "services": [],
-      "id": 6
     }
   ],
   "category": [
