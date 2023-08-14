@@ -4,26 +4,15 @@
   },
   "projects": [
     {
-      "name": "vai",
-      "budget": "444",
+      "name": "Guilherme",
+      "budget": "5000",
       "categories": {
-        "id": "1",
-        "name": "Ifra"
+        "id": "3",
+        "name": "Design"
       },
       "cost": 0,
       "services": [],
       "id": 1
-    },
-    {
-      "name": "4",
-      "budget": "444",
-      "categories": {
-        "id": "1",
-        "name": "Ifra"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 2
     }
   ],
   "category": [

@@ -1,6 +1,6 @@
 import styles from "./ProjectCards.module.css";
 import { BsPencil, BsFillTrashFill } from "react-icons/bs"; // Correção do import
-
+import {Link} from 'react-router-dom'
 function ProjectCards({ id, name, budget, category, handleRemove }) {
   return (
     <div className={styles.project_card}>
@@ -12,9 +12,14 @@ function ProjectCards({ id, name, budget, category, handleRemove }) {
         <span  className={`${styles[category.toLowerCase()]}`}></span> {category}
       </p>
 
-      <div>
-        <p>Editar</p>
-        <p>remover</p>
+      <div className={styles.project_card_actions}>
+      <Link  to="/">
+        <BsPencil/> Editar
+      </Link>
+        <button>
+        <BsFillTrashFill/> 
+        Excluir
+        </button>
       </div>
 
       
