@@ -6,10 +6,10 @@ import styles from "./Projects.module.css";
 import Container from "../layout/Container";
 import LinkButton from "../layout/LinkButton";
 import ProjectCards from "../projects/ProjectCards";
-
+import Loading from '../layout/Loading'
 function Projects() {
   const [projects, setProjects] = useState([]);
-
+  const [removeLoading,setRemoveLoading] = useState(false);
   const location = useLocation(); //  a partir de agora consigo pegar o history do NewProject
   let message = "";
   if (location.state) {
@@ -17,6 +17,7 @@ function Projects() {
   }
 
   useEffect(() => {
+  setTimeout(()=>{
     fetch("http://localhost:5000/projects", {
       method: "GET",
       headers: {
@@ -27,8 +28,10 @@ function Projects() {
       .then((data) => {
         setProjects(data);
         console.log(data);
+        setRemoveLoading(true)
       })
       .catch((err) => console.log(err));
+  },3000)
   }, []); // controlando um array vazio
   return (
     <div className={styles.project_container}>
@@ -49,7 +52,11 @@ function Projects() {
               category={project.categories.name}
               key={project.id}
             />
-          ))}
+          ))} 
+          {!removeLoading && <Loading/>}
+          {removeLoading && projects.length === 0 && (
+            <p>Não há projetos</p>
+          )}
       </Container>
     </div>
   );
