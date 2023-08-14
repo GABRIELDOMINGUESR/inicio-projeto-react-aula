@@ -2,7 +2,19 @@
   "__comments": {
     "description": "Este arquivo representa um banco de dados simulado para a entidade 'projects'."
   },
-  "projects": [],
+  "projects": [
+    {
+      "name": "test",
+      "budget": "70",
+      "categories": {
+        "id": "2",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 1
+    }
+  ],
   "category": [
     {
       "id": 1,
