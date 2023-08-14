@@ -6,10 +6,12 @@ import styles from "./Projects.module.css";
 import Container from "../layout/Container";
 import LinkButton from "../layout/LinkButton";
 import ProjectCards from "../projects/ProjectCards";
-import Loading from '../layout/Loading'
+import Loading from "../layout/Loading";
 function Projects() {
   const [projects, setProjects] = useState([]);
-  const [removeLoading,setRemoveLoading] = useState(false);
+  const [removeLoading, setRemoveLoading] = useState(false);
+  const[projectMessage,setProjectMessage] = useState('')
+
   const location = useLocation(); //  a partir de agora consigo pegar o history do NewProject
   let message = "";
   if (location.state) {
@@ -17,22 +19,41 @@ function Projects() {
   }
 
   useEffect(() => {
-  setTimeout(()=>{
-    fetch("http://localhost:5000/projects", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setProjects(data);
-        console.log(data);
-        setRemoveLoading(true)
+    setTimeout(() => {
+      fetch("http://localhost:5000/projects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((err) => console.log(err));
-  },3000)
+        .then((resp) => resp.json())
+        .then((data) => {
+          setProjects(data);
+          console.log(data);
+          setRemoveLoading(true);
+        })
+        .catch((err) => console.log(err));
+    }, 3000);
   }, []); // controlando um array vazio
+
+
+
+  // remover projetos
+  function removeProjects(id) {
+    fetch(`http://localhost:5000/projects/${id}`, {
+    method:'DELETE',
+    headers:{
+      'Content-type':'application/json'
+    }
+  })
+  .then(resp => resp.json())
+  .then(() =>{
+    setProjects(projects.filter((project) => project.id !==id)) //excluir no fonto
+    //mensagem
+    setProjectMessage('Projeto removido com sucesso!')
+  })
+  .catch(err => console.log(err))
+  }
   return (
     <div className={styles.project_container}>
       {/* <h1>Meus Projetos</h1> */}
@@ -42,6 +63,7 @@ function Projects() {
         <LinkButton to="/newproject" text=" criar Novo Projeto" />
       </div>
       {message && <Message type="success" msg={message} />}
+      {projectMessage && <Message type="success" msg={projectMessage} />}
       <Container customClass="start">
         {projects.length > 0 &&
           projects.map((project) => (
@@ -51,12 +73,11 @@ function Projects() {
               budget={project.budget}
               category={project.categories.name}
               key={project.id}
+              handleRemove={removeProjects}
             />
-          ))} 
-          {!removeLoading && <Loading/>}
-          {removeLoading && projects.length === 0 && (
-            <p>Não há projetos</p>
-          )}
+          ))}
+        {!removeLoading && <Loading />}
+        {removeLoading && projects.length === 0 && <p>Não há projetos</p>}
       </Container>
     </div>
   );
