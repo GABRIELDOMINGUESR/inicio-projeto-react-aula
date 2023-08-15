@@ -4,11 +4,11 @@
   },
   "projects": [
     {
-      "name": "test",
-      "budget": "70",
+      "name": "Guilherme ru",
+      "budget": "7000",
       "categories": {
-        "id": "2",
-        "name": "Desenvolvimento"
+        "id": "Selecione uma opção",
+        "name": "Selecione uma opção"
       },
       "cost": 0,
       "services": [],
