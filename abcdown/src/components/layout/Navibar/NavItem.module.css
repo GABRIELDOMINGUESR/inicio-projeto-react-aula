@@ -1,0 +1,24 @@
+.list_item_li_nav {
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    height: max-content;
+    width: max-content;
+    margin: 0.1em;
+    align-items: center;
+    gap: 0.2em;
+  }
+
+  /* .list_item_li_nav {
+      height:30px ;
+      width:30px ;
+  } */
+
+  .list_item_li_nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    background-color: aqua;
+    font-size: 1.5em;
+  }
+
