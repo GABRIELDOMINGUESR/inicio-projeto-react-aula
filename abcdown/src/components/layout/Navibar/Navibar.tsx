@@ -1,6 +1,6 @@
-// Navibar.tsx
+import React, { useState } from 'react';
 import styles from './Navibar.module.css'; // Importe o módulo CSS correto
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import Class from '../icons/class.png';
 import Home from '../icons/home.png';
@@ -11,31 +11,37 @@ import NavItem from './NavItem';
 import ImageLogin from '../img_Crud/image_login.png'
 
 function Navibar() {
+    const [showLabels, setShowLabels] = useState(true);
+
+    const toggleLabels = () => {
+        setShowLabels(!showLabels);
+    }
+
     return (
-  <>
-        <NavItem icon={ImageLogin} to="" label="Camila" className='user'/>
+        <>
+            <NavItem onClick={toggleLabels} icon={ImageLogin} to="" label={showLabels ? "Camila" : ""} classNameImg="user_img" classNameLink="name_user"/>
 
-<nav className={styles.container_nav}>
-    <ul>
-        <NavItem icon={Home} to="/" label="home" className='list_item_li_nav' />
-        {/* Outros itens do menu */}
-    </ul>
-    <ul>
-        <NavItem icon={Community} to="/comunidade" label="comunidade" className='list_item_li_nav'/>
-        {/* Outros itens do menu */}
-    </ul>
-    <ul>
-        <NavItem icon={Class} to="/turmas" label="sala" className='list_item_li_nav'/>
-        {/* Outros itens do menu */}
-    </ul>
-    <ul>
-        <NavItem icon={Settings} to="/configuracoes" label="configurações" className='list_item_li_nav'/>
-        {/* Outros itens do menu */}
-    </ul>
-</nav>
+            <nav className={styles.container_nav}>
+                <ul className={showLabels ? '' : styles.hiden}>
+                    <NavItem icon={Home} to="/" label={showLabels ? "home":""} classNameImg="navigation_img" classNameLink="navigation_text"/>
+                    {/* Outros fitens do menu */}
+                </ul>
+                <ul className={showLabels ? '' : styles.hiden}>
+                    <NavItem icon={Community} to="/comunidade" label={showLabels? "comunidade" : ""} classNameImg="navigation_img" classNameLink="navigation_text"/>
+                    {/* Outros itens do menu */}
+                </ul>
+                <ul className={showLabels ? '' : styles.hiden}>
+                    <NavItem icon={Class} to="/turmas" label={showLabels? "sala" : ""} classNameImg="navigation_img" classNameLink="navigation_text"/>
+                    {/* Outros itens do menu */}
+                </ul>
+                <ul className={showLabels ? '' : styles.hiden}>
+                    <NavItem icon={Settings} to="/configuracoes" label={showLabels ? "configuracoes" : ""} classNameImg="navigation_img" classNameLink="navigation_text"/>
+                    {/* Outros itens do menu */}
+                </ul>
+            </nav>
 
-<NavItem icon={Exit} to="" label="sair" className='exit' />
-  </>
+            <NavItem icon={Exit} to="/login" label={showLabels ?  "sair" : ""} classNameImg="exit_img" classNameLink="exit_text"/>
+        </>
     );
 }
 

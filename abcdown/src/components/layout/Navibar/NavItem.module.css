@@ -1,53 +1,44 @@
-.exit {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  background-color: blueviolet;
-  height: max-content;
-}
-
-.exit a {
+li {
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  background-color: #F0754E;
-  font-size: 1.5em;
-}
-
-.list_item_li_nav,
-.exit .user {
+  list-style: none;
   display: flex;
   flex-direction: row;
-  height: max-content;
   align-items: center;
-  gap: 0.2em;
+  
 }
-
-.list_item_li_nav {
-  background-color: blue;
-  width: max-content;
-  margin: 0.1em;
+.user_img {
+  border-radius: 50%; /* Aplicando borda circular */
+  width: 4em;
+  height: 4em;
 }
-
-.list_item_li_nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  background-color: aqua;
+.name_user {
+  color: black;
   font-size: 1.5em;
-}
 
-.user {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  background-color: palegreen;
-}
-
-.user a {
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
+}
+
+.navigation_img{
+height: 1.5em;
+}
+
+.navigation_text{
+  color: black;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.exit_text{
+  color: #F0754E;
+  font-size: 1.6em;
+  text-decoration: none;
+}
+
+.exit_img{
+  height: 2em;
+  width: 2em;
+}
+
+.hiden {
+  display: none;
 }

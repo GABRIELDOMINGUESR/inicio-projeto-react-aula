@@ -6,6 +6,7 @@ import Home from './components/pages/Home';
 import Turmas from './components/pages/Turmas';
 import Comunidade from './components/pages/Comunidade';
 import Configuracoes from './components/pages/Configuracoes';
+import Login from './components/pages/Configuracoes';
 import Sidebar from './components/layout/Sidebar'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/turmas" element={<Turmas />} />
           <Route path="/comunidade" element={<Comunidade />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
       </Router>
     </div>

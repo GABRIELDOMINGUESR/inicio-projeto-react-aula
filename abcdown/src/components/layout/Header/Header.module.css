@@ -1,7 +1,20 @@
 .container_title_page {
     background-color: #3393C3;
     width: 100%;
-    height: max-content;
+    height: 8vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.title_page {
+    background-color: grey;
+    flex: 1; /* Preenche o espaço disponível */
+    text-align: center; /* Centraliza o conteúdo dentro do título */
+    color: #FFFFFF;
+}
+
+.image_notifications {
+    /* background-color: khaki; */
+    width: 30px;
 }

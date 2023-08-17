@@ -5,15 +5,18 @@ import { Link } from 'react-router-dom';
 interface NavItemProps {
     icon: string;
     to: string;
-    label: string;
-    className: string;
+    label?: string;
+    className?: string;
+    onClick?: () => void;
+    classNameImg?: string;
+    classNameLink?: string;
 }
 
-function NavItem({ icon, to, label, className }: NavItemProps) {
+function NavItem({ icon, to, label, className, onClick, classNameImg, classNameLink }: NavItemProps) {
     return (
-        <li className={`${styles[className]}`}> {/* Usando a classe dinâmica aqui */}
-            <img src={icon} alt={label} />
-            <Link to={to}>{label}</Link>
+        <li onClick={onClick} className={className ? styles[className] : ''}>
+            <img src={icon} alt={label} className={classNameImg ? styles[classNameImg] : ''} />
+            <Link to={to} className={classNameLink ? styles[classNameLink] : ''}>{label}</Link>
         </li>
     );
 }
