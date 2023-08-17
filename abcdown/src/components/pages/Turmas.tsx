@@ -1,9 +1,9 @@
-
+import Header from '../layout/Header/Header' 
 function Turmas() {
 
     return (
     <>
-        <h1>Turmas</h1>
+       <Header title='Turmas'/>
 
     </>
     )

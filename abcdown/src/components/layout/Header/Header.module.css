@@ -1,0 +1,7 @@
+.container_title_page {
+    background-color: #3393C3;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    align-items: center;
+}

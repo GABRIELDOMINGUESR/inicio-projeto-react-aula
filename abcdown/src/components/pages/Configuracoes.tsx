@@ -1,9 +1,9 @@
-
+import Header from '../layout/Header/Header' 
 function Configuracoes() {
 
     return (
     <>
-        <h1>Configuracoes</h1>
+      <Header title='Configuraçoes'/>
 
     </>
     )

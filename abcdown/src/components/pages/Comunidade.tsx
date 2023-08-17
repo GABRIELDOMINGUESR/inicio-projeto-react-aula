@@ -1,10 +1,9 @@
-
+import Header from '../layout/Header/Header' 
 function Comunidade() {
 
     return (
     <>
-        <h1>Comunidade</h1>
-
+       <Header title='Comunidade'/>
     </>
     )
 }

@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import Turmas from './components/pages/Turmas';
 import Comunidade from './components/pages/Comunidade';
 import Configuracoes from './components/pages/Configuracoes';
-import Header from './components/layout/Header'
+import Sidebar from './components/layout/Sidebar'
 
 function App() {
   const divStyle: React.CSSProperties = {
@@ -23,7 +23,7 @@ function App() {
   return (
     <div style={divStyle}>
       <Router>
-        <Header/>
+        <Sidebar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/turmas" element={<Turmas />} />
