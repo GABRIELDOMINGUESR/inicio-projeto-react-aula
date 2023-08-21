@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
- import styles from './ContainerCard.module.css'; // Importe o módulo CSS correto
+import styles from './ContainerCard.module.css';
 
 interface ContainerCardProps {
     backgroundImage?: string;
@@ -8,13 +8,11 @@ interface ContainerCardProps {
     height?: string;
     text?: string;
     description?: string;
-    textClassName?: string;
-    descriptionClassName?: string;
-    imagem?: string
+
 }
 
 function ContainerCard(props: ContainerCardProps) {
-    const { backgroundImage, width, height, text, description, textClassName, descriptionClassName,imagem } = props;
+    const { backgroundImage, width, height, text, description} = props;
 
     const containerStyle = {
         backgroundImage: `url(${backgroundImage})`,
@@ -22,13 +20,14 @@ function ContainerCard(props: ContainerCardProps) {
         height: height,
     };
 
+    const containerCardClasses = `${styles.containerCard}`;
+
     return (
-        <div className={styles.containerCard} style={containerStyle}>
+        <div className={containerCardClasses} style={containerStyle}>
             <div className={styles.content}>
-                <h2 className={textClassName}>{text}</h2>
-                <p className={descriptionClassName}>{description}</p>
+                <h2 className={styles.custom_text}>{text}</h2>
+                <p className={styles.custom_description}>{description}</p>
             </div>
-            <img src= {imagem} alt="" />
         </div>
     );
 }

@@ -6,6 +6,7 @@ import ImageAtividade from '../layout/img_containers_cards/atividade.png'
 import ImageSobreAbcdown from '../layout/img_containers_cards/logo.png'
 import ImageCompartilhar from '../layout/img_containers_cards/compartilhar.png'
 import ContainerCard from '../layout/container_card/ContainerCard'; // Verifique o caminho correto para o arquivo
+import ContainerShareAbout from '../layout/container_card/ContainerShareAbout';
 function Home() {
     return (
         <>
@@ -33,11 +34,10 @@ function Home() {
                     <ContainerCard
                         backgroundImage={imageComunidade}
                         width="90%"
-                        height="300px"
+                        height="200px"
                         text="Comunidade"
                         description="Obtenha atividades de outros professores"
-                        textClassName="custom-text"
-                        descriptionClassName="custom-description" />
+                    />
 
                     <div style={{
                         display: 'flex',
@@ -52,20 +52,19 @@ function Home() {
                         <ContainerCard
                             backgroundImage={imageTurmas}
                             width="40%"
-                            height="400px"
-                            text=""
-                            description=""
-                            textClassName="custom-text"
-                            descriptionClassName="custom-description" />
+                            height="300px"
+                            text="Turmas"
+                            description="crie,edite e selecione turmas"
+
+                        />
 
                         <ContainerCard
                             backgroundImage={ImageAtividade}
-                            width="40%"
-                            height="400px"
-                            text=""
-                            description=""
-                            textClassName="custom-text"
-                            descriptionClassName="custom-description" />
+                            width="50%"
+                            height="300px"
+                            text="Atividades"
+                            description="acompanhe suas ativiadades"
+                        />
 
                     </div>
 
@@ -78,32 +77,24 @@ function Home() {
                         height: 'max-content',
                         alignItems: 'center',
                         justifyContent: 'center',
-                       // backgroundColor: 'red',
+                         backgroundColor: 'red',
                         gap: '50px'
                     }}>
-                        <ContainerCard
-                            backgroundImage=''
-                            width="40%"
-                            height="250px"
+                        <ContainerShareAbout
+                            width="50%"
+                            height="200px"
                             text="Sobre o ABCDown"
                             description="Conheça mais à respeito do nosso APP!"
-                            textClassName="custom-text"
-                            descriptionClassName="custom-description"
-                            imagem={ImageSobreAbcdown}
+                            // imageSrc={ImageSobreAbcdown}
                         />
 
-
-
-
-                        <ContainerCard
-                            backgroundImage=''
-                            width="40%"
-                            height="250px"
+                        <ContainerShareAbout
+                            width="50%"
+                            height="200px"
                             text="Compartilhar"
                             description="Gostou do ABCDown? Compartilhe com amigos!"
-                            textClassName="custom-text"
-                            descriptionClassName="custom-description"
-                            imagem={ImageCompartilhar} />
+                            // imageSrc={ImageCompartilhar}
+                        />
                     </div>
 
 
