@@ -10,10 +10,11 @@ interface ContainerCardProps {
     description?: string;
     textClassName?: string;
     descriptionClassName?: string;
+    imagem?: string
 }
 
 function ContainerCard(props: ContainerCardProps) {
-    const { backgroundImage, width, height, text, description, textClassName, descriptionClassName } = props;
+    const { backgroundImage, width, height, text, description, textClassName, descriptionClassName,imagem } = props;
 
     const containerStyle = {
         backgroundImage: `url(${backgroundImage})`,
@@ -27,6 +28,7 @@ function ContainerCard(props: ContainerCardProps) {
                 <h2 className={textClassName}>{text}</h2>
                 <p className={descriptionClassName}>{description}</p>
             </div>
+            <img src= {imagem} alt="" />
         </div>
     );
 }
