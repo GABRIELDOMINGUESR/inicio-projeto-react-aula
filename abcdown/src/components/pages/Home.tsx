@@ -7,6 +7,11 @@ import ImageSobreAbcdown from '../layout/img_containers_cards/logo.png'
 import ImageCompartilhar from '../layout/img_containers_cards/compartilhar.png'
 import ContainerCard from '../layout/container_card/ContainerCard'; // Verifique o caminho correto para o arquivo
 import ContainerShareAbout from '../layout/container_card/ContainerShareAbout';
+import styles from '../layout/container_card/ContainerShareAbout.module.css';
+
+
+import { Link } from 'react-router-dom';
+
 function Home() {
     return (
         <>
@@ -31,13 +36,18 @@ function Home() {
                     //backgroundColor: 'pink',
                 }}>
 
+
                     <ContainerCard
+
                         backgroundImage={imageComunidade}
-                        width="90%"
+                        width="83%"
                         height="200px"
                         text="Comunidade"
                         description="Obtenha atividades de outros professores"
+                        link="/comunidade"
                     />
+
+
 
                     <div style={{
                         display: 'flex',
@@ -49,18 +59,24 @@ function Home() {
                         //backgroundColor: 'red',
                         gap: '50px'
                     }}>
+
+
                         <ContainerCard
                             backgroundImage={imageTurmas}
                             width="40%"
                             height="300px"
                             text="Turmas"
                             description="crie,edite e selecione turmas"
+                            link="/turmas"
 
                         />
 
+
+
+
                         <ContainerCard
                             backgroundImage={ImageAtividade}
-                            width="50%"
+                            width="40%"
                             height="300px"
                             text="Atividades"
                             description="acompanhe suas ativiadades"
@@ -77,23 +93,25 @@ function Home() {
                         height: 'max-content',
                         alignItems: 'center',
                         justifyContent: 'center',
-                         backgroundColor: 'red',
+                        backgroundColor: 'red',
                         gap: '50px'
                     }}>
                         <ContainerShareAbout
-                            width="50%"
+                            width="40%"
                             height="200px"
                             text="Sobre o ABCDown"
                             description="Conheça mais à respeito do nosso APP!"
-                            // imageSrc={ImageSobreAbcdown}
+                            imageSrc={ImageSobreAbcdown}
+                            imageClass={styles.imageAboutAbcdown}  // Classe da imagem personalizada
                         />
 
                         <ContainerShareAbout
-                            width="50%"
+                            width="40%"
                             height="200px"
                             text="Compartilhar"
                             description="Gostou do ABCDown? Compartilhe com amigos!"
-                            // imageSrc={ImageCompartilhar}
+                         imageSrc={ImageCompartilhar}
+                        imageClass={styles.imageShare} // Classe da imagem personalizada
                         />
                     </div>
 

@@ -7,4 +7,20 @@
     display: flex;
     background-color: #fff;
     border-radius: 20px;
+  
 }
+.custom_text {background-color: aqua;
+width: max-content;
+}
+
+.imageAboutAbcdown {
+    width: 7em;
+    height: 7em;
+    background-color: aqua;
+}
+.imageShare {
+    width: 11em;
+    height: 11em;
+}
+
+

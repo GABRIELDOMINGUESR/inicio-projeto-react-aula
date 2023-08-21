@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ContainerCard.module.css';
+import { Link, LinkProps } from 'react-router-dom';
 
 interface ContainerCardProps {
     backgroundImage?: string;
@@ -8,11 +9,11 @@ interface ContainerCardProps {
     height?: string;
     text?: string;
     description?: string;
-
+    link?: string; // URL do link
 }
 
 function ContainerCard(props: ContainerCardProps) {
-    const { backgroundImage, width, height, text, description} = props;
+    const { backgroundImage, width, height, text, description, link } = props;
 
     const containerStyle = {
         backgroundImage: `url(${backgroundImage})`,
@@ -22,12 +23,22 @@ function ContainerCard(props: ContainerCardProps) {
 
     const containerCardClasses = `${styles.containerCard}`;
 
+    const renderContent = () => (
+        <div className={styles.content}>
+            <h2 className={styles.custom_text}>{text}</h2>
+            <p className={styles.custom_description}>{description}</p>
+        </div>
+    );
+
     return (
         <div className={containerCardClasses} style={containerStyle}>
-            <div className={styles.content}>
-                <h2 className={styles.custom_text}>{text}</h2>
-                <p className={styles.custom_description}>{description}</p>
-            </div>
+            {link ? (
+                <Link to={link} style={{ width: '100%', height: '100%', display: 'block' }}>
+                    {renderContent()}
+                </Link>
+            ) : (
+                renderContent()
+            )}
         </div>
     );
 }
