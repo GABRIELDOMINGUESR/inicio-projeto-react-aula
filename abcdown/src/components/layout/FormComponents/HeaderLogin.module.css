@@ -1,0 +1,14 @@
+header {
+    width: 100%;
+    background-color: yellowgreen;
+    padding-left: 5%; /* Espaçamento interno à esquerda em porcentagem */
+    box-sizing: border-box;
+    height: 9vh;
+    display: flex;
+    align-items: center;
+    
+}
+.Img {
+    width: 4vw;
+    height: 7vh;
+}
