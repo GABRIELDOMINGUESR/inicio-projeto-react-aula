@@ -5,6 +5,7 @@
     align-items: center;
     height: max-content;
     width: max-content;
+    gap: 3vh;
 }
 
 .title{

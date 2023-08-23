@@ -1,7 +1,6 @@
-.link {
+.link,.navItem {
   text-decoration: none; /* Remova o sublinhado do link */
   color: inherit; /* Use a cor de texto padrão */
-  background-color: aqua;
   display: flex;
   align-items: center;
   width: max-content;
@@ -11,7 +10,9 @@
 
 .navItem{
 
+  font-weight: bold;
 }
+
 
 .navigation_img{
   height: 25px;
@@ -21,6 +22,10 @@
 }
 
 .exit_img{
-  height: 35px;
+  height: 20px;
   width: 30;
+}
+.text_exit {
+  color: #F0754E;
+  font-size: 1.2em;
 }

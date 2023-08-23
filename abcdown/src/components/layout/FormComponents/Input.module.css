@@ -1,11 +1,11 @@
 .inputContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: max-content;
     background-color: teal;
     display: flex;
     justify-content: center;
-    align-items: center;
+    
 }
 
 .textTitle {

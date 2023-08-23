@@ -1,6 +1,7 @@
 .containerBtn{
     background-color: tomato;
-    width: 100%;
+    /* width: 100%; */
+    width: 60vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,4 +14,5 @@
     font-weight:bold;
     border-radius: 40px;
     font-size:0.9em ;
+    /* width: 100%; */
 }

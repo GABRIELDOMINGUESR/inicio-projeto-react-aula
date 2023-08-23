@@ -1,5 +1,5 @@
 .containerCard{
-    background-color: blueviolet;
+
     display: flex;
     flex-direction: row;
     height: 10px;
@@ -9,18 +9,26 @@
     border-radius: 20px;
   
 }
-.custom_text {background-color: aqua;
+.custom_text {
+/* background-color: aqua; */
+padding: 1.5em 0 0 1.5em;
 width: max-content;
+}
+
+.custom_description{
+     /* background-color: cadetblue;  */
+     font-size: 0.8em;
+    padding: 0 0 0 3em;
 }
 
 .imageAboutAbcdown {
     width: 7em;
-    height: 7em;
-    background-color: aqua;
+    height: 5em;
+    /* background-color: aqua; */
 }
 .imageShare {
-    width: 11em;
-    height: 11em;
+    width: 10em;
+    height: 80%;
 }
 
 

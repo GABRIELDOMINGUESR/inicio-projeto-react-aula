@@ -10,7 +10,7 @@ interface HeaderProps {
 function Header({ title }: HeaderProps) {
     return (
         <div className={styles.container_title_page}>
-    <h1 className={styles.title_page}>{title}</h1>;
+    <h1 className={styles.title_page}>{title}</h1>
     <img src={Notifications} className={styles.image_notifications} />
 
         </div>

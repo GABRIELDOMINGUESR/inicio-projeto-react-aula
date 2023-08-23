@@ -40,7 +40,7 @@ function Navibar() {
                 </ul>
             </nav>
 
-            <NavItem icon={Exit} to="/login" label={showLabels ?  "sair" : ""} classNameImg="exit_img" />
+            <NavItem icon={Exit} to="/login" label={showLabels ?  "sair" : ""} classNameImg="exit_img" className="text_exit" />
         </>
     );
 }

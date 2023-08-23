@@ -1,5 +1,5 @@
 .containerCard {
-     background-color: aqua; 
+     /* background-color: aqua;  */
     width: max-content;
     background-repeat: no-repeat;
     background-repeat: no-repeat;
@@ -11,7 +11,7 @@
 
 .custom_text{
     color: #fff;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     padding: 1.5em 0 0 1.5em;
     gap: 0;
     width: max-content;
@@ -19,7 +19,6 @@
 }
 .custom_description {
     color: #fff;
-  
     padding: 0 0 0 1.5em;
     display: flex;
     align-items: center;

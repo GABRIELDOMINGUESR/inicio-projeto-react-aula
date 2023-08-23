@@ -41,7 +41,7 @@ function Home() {
 
                         backgroundImage={imageComunidade}
                         width="83%"
-                        height="200px"
+                        height="100px"
                         text="Comunidade"
                         description="Obtenha atividades de outros professores"
                         link="/comunidade"
@@ -64,7 +64,7 @@ function Home() {
                         <ContainerCard
                             backgroundImage={imageTurmas}
                             width="40%"
-                            height="300px"
+                            height="200px"
                             text="Turmas"
                             description="crie,edite e selecione turmas"
                             link="/turmas"
@@ -77,7 +77,7 @@ function Home() {
                         <ContainerCard
                             backgroundImage={ImageAtividade}
                             width="40%"
-                            height="300px"
+                            height="200px"
                             text="Atividades"
                             description="acompanhe suas ativiadades"
                         />
@@ -93,7 +93,7 @@ function Home() {
                         height: 'max-content',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: 'red',
+                        // backgroundColor: 'red',
                         gap: '50px'
                     }}>
                         <ContainerShareAbout

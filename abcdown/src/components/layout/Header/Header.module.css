@@ -8,7 +8,7 @@
 }
 
 .title_page {
-    background-color: grey;
+    /* background-color: grey; */
     flex: 1; /* Preenche o espaço disponível */
     text-align: center; /* Centraliza o conteúdo dentro do título */
     color: #FFFFFF;
@@ -16,5 +16,8 @@
 
 .image_notifications {
     /* background-color: khaki; */
-    width: 30px;
+    width:30px;
+    height:30px;
+
+    margin-right: 3em;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ContainerCard.module.css';
-import { Link, LinkProps } from 'react-router-dom';
 
 interface ContainerCardProps {
     backgroundImage?: string;
@@ -33,9 +32,9 @@ function ContainerCard(props: ContainerCardProps) {
     return (
         <div className={containerCardClasses} style={containerStyle}>
             {link ? (
-                <Link to={link} style={{ width: '100%', height: '100%', display: 'block' }}>
+                <a href={link} style={{ width: '100%', height: '100%', display: 'block', textDecoration: 'none', color: 'inherit' }}>
                     {renderContent()}
-                </Link>
+                </a>
             ) : (
                 renderContent()
             )}

@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
    justify-content: space-between;
-    background-color: green;
+    background-color:#FFF;
     height: 100%;
-    padding: 30px;
+    padding: 5px;
     align-items: center;
-    
+    border: 1px solid #EAEAEA; /* largura estilo cor */
 
 }
