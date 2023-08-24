@@ -6,26 +6,28 @@
   width: max-content;
   height: max-content;
   gap: 1vw;
+
+  margin: 30px 0 30px 0;
 }
 
 .navItem{
 
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
 
 .navigation_img{
-  height: 25px;
-  width: 30;
-
+  height: 40px;
+  width: 35px;
   
 }
 
 .exit_img{
-  height: 20px;
+  height: 35px;
   width: 30;
 }
 .text_exit {
   color: #F0754E;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }

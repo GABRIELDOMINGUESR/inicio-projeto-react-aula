@@ -1,4 +1,4 @@
-.Container {
+.loginRowContainer {
     background-color: #F0F0F0;
     display: flex;
     flex-direction: row;
@@ -14,10 +14,12 @@
     align-items: center;
     width: 60%;
     height: 100%;
+  
+   
 }
 
 .rightSideContainer {
-    background-image: url(${BackgroundImageLogin});
+    
     background-size: 100% 100%;
     background-position: center;
     background-color: blue;

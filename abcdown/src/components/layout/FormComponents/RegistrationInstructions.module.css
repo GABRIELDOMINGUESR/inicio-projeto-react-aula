@@ -1,4 +1,4 @@
-.containerTexts{
+.containerTexts {
     background-color: tomato;
     display: flex;
     flex-direction: column;
@@ -6,13 +6,16 @@
     height: max-content;
     width: max-content;
     gap: 3vh;
-}
-
-.title{
-font-weight: bold;
-}
-.description{
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 4rem;
+  }
+  
+  .description {
     background-color: teal;
-    max-width: 30900px;
-
-}
+    height: max-content;
+    font-size: 2rem;
+  }
+  

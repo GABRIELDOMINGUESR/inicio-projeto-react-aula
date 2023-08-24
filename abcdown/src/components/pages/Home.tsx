@@ -13,7 +13,17 @@ import styles from '../layout/container_card/ContainerShareAbout.module.css';
 import { Link } from 'react-router-dom';
 
 function Home() {
+    const heigthCommunity: string = '25vh';
+    const widthCommunity:string = '85%';
+
+    const widthClassActivity: string = '41%';
+    const heigthClassActivity: string = '30vh';
+
+   
+     const widthAboutShare:string = '41%';
+     const heigthAboutShare:string ='23vh';
     return (
+
         <>
             <div style={{
                 display: 'flex',
@@ -40,11 +50,11 @@ function Home() {
                     <ContainerCard
 
                         backgroundImage={imageComunidade}
-                        width="83%"
-                        height="100px"
                         text="Comunidade"
                         description="Obtenha atividades de outros professores"
                         link="/comunidade"
+                        width= {widthCommunity}
+                        height= {heigthCommunity}
                     />
 
 
@@ -63,11 +73,11 @@ function Home() {
 
                         <ContainerCard
                             backgroundImage={imageTurmas}
-                            width="40%"
-                            height="200px"
                             text="Turmas"
                             description="crie,edite e selecione turmas"
                             link="/turmas"
+                            width= {widthClassActivity}
+                            height= {heigthClassActivity}
 
                         />
 
@@ -76,10 +86,10 @@ function Home() {
 
                         <ContainerCard
                             backgroundImage={ImageAtividade}
-                            width="40%"
-                            height="200px"
                             text="Atividades"
                             description="acompanhe suas ativiadades"
+                            width= {widthClassActivity}
+                            height= {heigthClassActivity}
                         />
 
                     </div>
@@ -97,8 +107,8 @@ function Home() {
                         gap: '50px'
                     }}>
                         <ContainerShareAbout
-                            width="40%"
-                            height="200px"
+                            width={widthAboutShare}
+                            height={heigthAboutShare}
                             text="Sobre o ABCDown"
                             description="Conheça mais à respeito do nosso APP!"
                             imageSrc={ImageSobreAbcdown}
@@ -106,8 +116,8 @@ function Home() {
                         />
 
                         <ContainerShareAbout
-                            width="40%"
-                            height="200px"
+                            width={widthAboutShare}
+                            height={heigthAboutShare}
                             text="Compartilhar"
                             description="Gostou do ABCDown? Compartilhe com amigos!"
                          imageSrc={ImageCompartilhar}

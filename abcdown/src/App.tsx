@@ -47,6 +47,7 @@ import Comunidade from './components/pages/Comunidade';
 import Configuracoes from './components/pages/Configuracoes';
 import Login from './components/pages/Login';
 import Sidebar from './components/layout/Sidebar';
+import ResetPassword from './components/pages/ResetPassword';
 
 function App() {
   const divStyle: React.CSSProperties = {
@@ -81,6 +82,8 @@ function App() {
           </Route>
           {/* Rota sem Sidebar */}
           <Route path="/login" element={<Login />} />
+          <Route path="/redefinirsenha" element={<ResetPassword/>} />
+          
         </Routes>
       </Router>
     </div>
