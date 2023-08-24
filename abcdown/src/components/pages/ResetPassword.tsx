@@ -15,42 +15,42 @@ function ResetPassword() {
   const heightButton: string = '6.5vh';
   const widthInput: string = '35vw';
 
-    const leftSideContent = (
-        <>
-         <HeaderLogin /> 
-         <div
+  const leftSideContent = (
+    <>
+      <HeaderLogin />
+      <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '3vh',
-          height:'100%'
+          height: '100%'
         }}
       >
 
-<RegistrationInstructions
+        <RegistrationInstructions
           textTitulo="Redefinir senha"
           textDescription="Por favor, digite o endereço de e-mail utilizado no cadastro"
         />
-<Input text="Email" width={widthInput} height={heightInput} />
-         <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
-</div>
+        <Input text="Email" width={widthInput} height={heightInput} />
+        <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
+      </div>
 
 
-        </>
-    )
-    return (
-        <>
-           
-          <DivRowLogin
-            leftSideContent={leftSideContent}
-             rightSideBackgroundImage={BackgroundImageResetPassword }
+    </>
+  )
+  return (
+    <>
 
-          /> 
+      <DivRowLogin
+        leftSideContent={leftSideContent}
+        rightSideBackgroundImage={BackgroundImageResetPassword}
 
-          </>
-        );
+      />
+
+    </>
+  );
 }
 
 export default ResetPassword

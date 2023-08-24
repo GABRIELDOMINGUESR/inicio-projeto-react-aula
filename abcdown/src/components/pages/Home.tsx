@@ -17,11 +17,11 @@ function Home() {
     const widthCommunity:string = '85%';
 
     const widthClassActivity: string = '41%';
-    const heigthClassActivity: string = '30vh';
+    const heigthClassActivity: string = '35vh';
 
    
      const widthAboutShare:string = '41%';
-     const heigthAboutShare:string ='23vh';
+     const heigthAboutShare:string ='20vh';
     return (
 
         <>
@@ -40,10 +40,11 @@ function Home() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center', // Centralizar horizontalmente o conteúdo
-                    justifyContent: 'space-around', // Distribuir espaço entre os elementos
+                    justifyContent: 'center', // Distribuir espaço entre os elementos
+                    gap:'4%',
                     width: '100%',
                     height: '100%',
-                    //backgroundColor: 'pink',
+                    // backgroundColor: 'pink',
                 }}>
 
 

@@ -2,33 +2,34 @@
 
     display: flex;
     flex-direction: row;
-    height: 10px;
-    width: 10px;
     display: flex;
     background-color: #fff;
     border-radius: 20px;
-  
+    
+    
 }
 .custom_text {
-/* background-color: aqua; */
-padding: 1.5em 0 0 1.5em;
+  /* background-color: aqua;  */
+padding: 15% 0 0 15%;
 width: max-content;
+font-size: 1.5vw;
 }
 
 .custom_description{
-     /* background-color: cadetblue;  */
-     font-size: 0.8em;
-    padding: 0 0 0 3em;
+    /* background-color: cadetblue;  */
+     font-size: 0.8vw;
+    padding: 0 0 0 15%;
 }
 
 .imageAboutAbcdown {
-    width: 7em;
-    height: 5em;
-    /* background-color: aqua; */
+    width: 30%;
+    height: 50%;
+    /* background-color: aqua;  */
 }
 .imageShare {
-    width: 10em;
+    width: 30%;
     height: 80%;
+     
 }
 
 

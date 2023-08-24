@@ -7,7 +7,7 @@ import BackgroundImageLogin from '../layout/loginImages/loginBackground.png';
 import HeaderLogin from '../layout/FormComponents/HeaderLogin';
 import GoogleLoginButton from '../layout/FormComponents/GoogleLoginButton';
 import ImageGoogle from '../layout/loginImages/Google.png';
-
+import { useState, useEffect } from 'react';
 function Login() {
   const heightInput: string = '5vh';
   const heightButton: string = '6.5vh';
@@ -36,7 +36,8 @@ function Login() {
           width={widthInput}
           height={heightInput}
         />
-        <Input text="Nome" width={widthInput} height={heightInput} />
+        
+        <Input text="Email" width={widthInput} height={heightInput} />
         <Input text="Senha:" width={widthInput} height={heightInput} />
         <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
       </div>

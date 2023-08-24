@@ -16,7 +16,13 @@
     gap: 1vw;
 }
 
+.image{
+  height: 60%;
+  width: 5%;
+}
+
 .textTitle {
     font-weight: bold;
+    font-size: 0.8vw;
 }
 

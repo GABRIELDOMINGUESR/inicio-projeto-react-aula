@@ -10,12 +10,12 @@
   
   .title {
     font-weight: bold;
-    font-size: 4rem;
+    font-size: 3.3vw;
   }
   
   .description {
     background-color: teal;
     height: max-content;
-    font-size: 2rem;
+    font-size: 1vw;
   }
   
