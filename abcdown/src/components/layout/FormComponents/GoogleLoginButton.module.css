@@ -14,10 +14,11 @@
     line-height: 24px;
     cursor: pointer;
     gap: 1vw;
+    padding: 1.5vw;
 }
 
 .image{
-  height: 60%;
+  height: 3vh;
   width: 5%;
 }
 

@@ -24,38 +24,98 @@ function Login() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '4vh',
           height: '100%',
-          backgroundColor:'red'
+          // backgroundColor: 'red'
         }}
       >
-        <RegistrationInstructions
-          textTitulo="Login"
-          textDescription="is simply dummy text of the printing and typesetting industry."
-        />
-        <GoogleLoginButton
-          text="Entrar com o Google"
-          imageSrc={ImageGoogle}
-          width={widthInput}
-          height={heightInput}
-        />
-        <UserDecisionHandler width={widthInput} height={heightButton} lineExtent= '100%'/>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            // backgroundColor: 'green',
+            height: 'max-content',
+            width: 'max-content',
 
-        <Input text="Email" width={widthInput} height={heightInput} />
-        <Input text="Senha:" width={widthInput} height={heightInput} />
-        <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
-
-        <div style={{
-          //backgroundColor: 'tomato',
-          display: 'flex',
-          flexDirection: 'row',
-          width: widthInput, // Correção: 'with' para 'width'
-          height: heightButton,
-          justifyContent:'space-between'
-        }}>
-          <AuthenticationOptions text='Crie uma conta' color='#F0754E'/>
-          <AuthenticationOptions text='Esqueceu sua senha?' color='#000000'/>
+            gap: '30px'
+          }}
+        >
+          <RegistrationInstructions
+            textTitulo="Login"
+            textDescription="is simply dummy text of the printing and typesetting industry."
+          />
+          <GoogleLoginButton
+            text="Entrar com o Google"
+            imageSrc={ImageGoogle}
+            width={widthInput}
+            height={heightInput}
+          />
         </div>
+
+        <UserDecisionHandler width={widthInput} height={heightButton} lineExtent='100%' />
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            //  backgroundColor: 'yellow',
+            height: 'max-content',
+            width: 'max-content',
+            gap: '5vh'
+
+          }}
+        >
+
+          <div
+          
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            // backgroundColor: 'black',
+            height: 'max-content',
+            width: 'max-content',
+            gap:'2vh'
+
+          }}>
+            <Input text="Email" width={widthInput} height={heightInput} />
+            <Input text="Senha:" width={widthInput} height={heightInput} />
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              // backgroundColor: 'yellow',
+              height: 'max-content',
+              width: 'max-content',
+              gap: '2vh'
+
+            }}
+          >
+            <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
+
+            <div style={{
+              //backgroundColor: 'tomato',
+              display: 'flex',
+              flexDirection: 'row',
+              width: widthInput, // Correção: 'with' para 'width'
+              height: heightButton,
+              justifyContent: 'space-between'
+            }}>
+              <AuthenticationOptions text='Crie uma conta' color='#F0754E' />
+              <AuthenticationOptions text='Esqueceu sua senha?' color='#000000' />
+
+              
+            </div>
+          </div>
+        </div>
+
       </div>
     </>
 

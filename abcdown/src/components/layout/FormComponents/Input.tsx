@@ -5,6 +5,7 @@ interface InputProps {
     text?: string;
     width?: string;
     height?: string;
+    type?: string;
 }
 
 function Input(props: InputProps) {
@@ -18,7 +19,7 @@ function Input(props: InputProps) {
             <span className={styles.textTitle}>{props.text}</span>
             <input
                 className={`${styles.inputField} ${styles.inputWithImage}`}
-                type="text"
+                type={props.type}
                 style={{
                     ...inputStyle,
                   
