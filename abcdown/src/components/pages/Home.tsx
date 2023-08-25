@@ -88,6 +88,7 @@ function Home() {
                         <ContainerCard
                             backgroundImage={ImageAtividade}
                             text="Atividades"
+                            link=""
                             description="acompanhe suas ativiadades"
                             width= {widthClassActivity}
                             height= {heigthClassActivity}
