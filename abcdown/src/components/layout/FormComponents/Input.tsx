@@ -6,6 +6,8 @@ interface InputProps {
     width?: string;
     height?: string;
     type?: string;
+    value?: string; // Adicione a propriedade value para o valor do input
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function Input(props: InputProps) {
@@ -22,12 +24,13 @@ function Input(props: InputProps) {
                 type={props.type}
                 style={{
                     ...inputStyle,
-                  
                 }}
-              
+                value={props.value} // Use o valor da propriedade value
+                onChange={props.onChange}
             />
         </div>
     );
 }
+
 
 export default Input;
