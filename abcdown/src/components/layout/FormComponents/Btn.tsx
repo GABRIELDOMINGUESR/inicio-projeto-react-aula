@@ -7,6 +7,7 @@ interface ButtonProps {
     width?: string;
     height?: string;
     onClick?: () => void; // Correção do tipo da prop onClick
+
 }
 
 function Button(props: ButtonProps) {
