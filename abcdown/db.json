@@ -1,5 +1,5 @@
 {
-    "tbl_professor": [
+    "professor": [
      
         
     ],
@@ -11,6 +11,10 @@
         {
             "id_genero": 2,
             "nome_genero": "Feminino"
+        },
+        {
+            "id_genero": 3,
+            "nome_genero": "Outros"
         }
        
     ]

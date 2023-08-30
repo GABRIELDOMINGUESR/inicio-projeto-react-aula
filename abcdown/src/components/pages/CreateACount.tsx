@@ -1,30 +1,33 @@
 
-   // {
-        //     "id_professor": 1,
-        //     "nome": "John Doe",
-        //     "email": "john@example.com",
-        //     "cpf": "123.456.789-00",
-        //     "data_nascimento": "1990-01-15",
-        //     "foto": "https://example.com/john.jpg",
-        //     "senha": "hashed_password",
-        //     "id_genero": 1
-        // },
-        // {
-        //     "id_professor": 2,
-        //     "nome": "Jane Smith",
-        //     "email": "jane@example.com",
-        //     "cpf": "987.654.321-00",
-        //     "data_nascimento": "1985-05-20",
-        //     "foto": "https://example.com/jane.jpg",
-        //     "senha": "hashed_password",
-        //     "id_genero": 2
-        // }
-import React, { useState, useEffect} from "react";
+// {
+//     "id_professor": 1,
+//     "nome": "John Doe",
+//     "email": "john@example.com",
+//     "cpf": "123.456.789-00",
+//     "data_nascimento": "1990-01-15",
+//     "foto": "https://example.com/john.jpg",
+//     "senha": "hashed_password",
+//     "id_genero": 1
+// },
+// {
+//     "id_professor": 2,
+//     "nome": "Jane Smith",
+//     "email": "jane@example.com",
+//     "cpf": "987.654.321-00",
+//     "data_nascimento": "1985-05-20",
+//     "foto": "https://example.com/jane.jpg",
+//     "senha": "hashed_password",
+//     "id_genero": 2
+// }
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Btn from '../layout/FormComponents/Btn';
 import HeaderLogin from '../layout/FormComponents/HeaderLogin';
 import RegistrationInstructions from '../layout/FormComponents/RegistrationInstructions';
 import Input from '../layout/FormComponents/Input';
 import GetImage from '../layout/FormComponents/imageGetImage/getImage.svg'
+
 interface UserDataSectionProps {
 
     proceedToLoginData: () => void;
@@ -35,11 +38,16 @@ interface UserDataSectionProps {
 function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     const [userDataComplete, setUserDataComplete] = useState(false);
     const [isValidCep, setIsValidCep] = useState(false);
+    interface Option {
+        id_genero: number;
+        nome_genero: string;
+    }
+
 
     const checkUserDataCompletion = () => {
         if (
             nome &&
-            sexo &&
+            options &&
             cpf &&
             dataNascimento &&
             cep &&
@@ -54,12 +62,12 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             console.log("Preencha todos os campos")
         }
     };
-    const handleInputClick = async() => {
+    const handleInputClick = async () => {
         // validateCepLength()
         // Call the function to handle input changes here
         // Example: handleInputChange("nome", "John");
         checkUserDataCompletion(); // Validate the inputs
-        
+
     };
 
 
@@ -68,16 +76,16 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newCep = e.target.value; // Obtém o novo valor do CEP
         const numericCep = newCep.replace(/\D/g, ""); // Remove caracteres não numéricos
-    
+
         setCep(numericCep);
-        setNumero(numericCep)
-     
+
+
         console.log(cep)
 
     };
     const validateCep = async () => {
 
-        
+
         try {
             const isValid = await fetchCepData();
             if (isValid) {
@@ -97,7 +105,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
         const apiUrl = `http://localhost:3001/api/cep/${cep}`;
         try {
             const response = await fetch(apiUrl);
-    
+
             if (response.ok) {
                 const data = await response.json();
                 if (!data.erro) {
@@ -119,8 +127,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             return false; // CEP is invalid due to error
         }
     };
-    
-    
+
 
 
     const heightInput: string = '4vh';
@@ -134,7 +141,10 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     const widthBtnLeft: string = '30vw';
 
     const [nome, setNome] = useState("");
-    const [sexo, setSexo] = useState("");
+    const [sexo, setSexo] = useState(""); // Certifique-se de definir a interface Genero
+
+    const [options, setOptions] = useState<Option[]>([]);
+
     const [cpf, setCpf] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [cep, setCep] = useState("");
@@ -159,6 +169,26 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
         setEstado("");
         setNumero("");
     };
+
+    useEffect(() => {
+        // Fazer a solicitação GET para obter as opções de gênero
+        fetch('http://localhost:5000/tbl_genero',{
+            method: "GET",
+            headers: {  'Accept': 'application/json',
+          
+          },
+          
+          })// Substitua pela URL correta
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                //  setGeneros(data.tbl_genero);
+                setOptions(data);
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar os gêneros:", error);
+            });
+    }, []);
     return (
         <div
             style={{
@@ -225,13 +255,41 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
                         onChange={(e) => setNome(e.target.value)}
                     />
 
-                    <Input
+                    {/* <Input
                         text="sexo"
                         width={widthInputright}
                         height={heightInput}
                         value={sexo} // Fornecer o valor do estado
                         onChange={(e) => setSexo(e.target.value)}
-                    />
+                    /> */}
+
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}>
+                        <label>Sexo:</label>
+                        <select
+
+                            style={{
+                                width: widthInputright,
+                                height: heightInput,
+                                borderRadius: '40px',
+                                borderColor: '#C9C9C9',
+                                borderWidth: '1px',
+                                borderStyle: 'solid',
+                                outline: 'none',
+                                paddingLeft: '10px',
+                                lineHeight: '24px',
+                            }}
+                        >
+                            <option value=""></option>
+                            {options.map((option) => (
+                                <option key={option.id_genero} value={option.nome_genero}>
+                                    {option.nome_genero}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
                 <div
                     style={{
@@ -353,7 +411,17 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
 
 
 
-
+interface Professor {
+    id_professor: number;
+    nome: string;
+    email: string;
+    cpf: string;
+    data_nascimento: string;
+    foto: string;
+    senha: string;
+    id_genero: number;
+    // ... Other properties ...
+}
 
 function LoginDataSection() {
     const heightInput: string = '4vh';
@@ -377,6 +445,30 @@ function LoginDataSection() {
             reader.readAsDataURL(file);
         }
     };
+
+    const navigate = useNavigate();
+    function CreatePost(professor: Professor) {
+        // professor.cost = 0
+        // professor.service = []
+
+        fetch('http://localhost:5000/professor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(professor)
+        })
+            .then((resp) => resp.json)
+            .then((data) => {
+                console.log(data)
+                navigate('/login', { state: { message: "Projeto criado com sucesso!" } });
+            })
+            .catch((err) => console.log(err))
+    }
+
+    const AssincPost = async () => {
+        //   CreatePost()
+    }
 
     const handleDivClick = () => {
         const fileInput = document.getElementById('hiddenFileInput') as HTMLInputElement;
@@ -454,13 +546,13 @@ function LoginDataSection() {
                             />
                         ) : (
 
-                                <img
-                                    src={GetImage}
-                                    alt="Descrição da imagem"
-                                    style={{ width: '30%', height: '30%' }}
-                                />
+                            <img
+                                src={GetImage}
+                                alt="Descrição da imagem"
+                                style={{ width: '30%', height: '30%' }}
+                            />
 
-                            )}
+                        )}
                     </div>
 
                     <input
@@ -541,7 +633,7 @@ function LoginDataSection() {
 
                         }}>
                         <Btn text="Voltar" color="#F0754E" width={widthBtnRigth} />
-                        <Btn text="Mandar" color="#43B1B1" width={widthBtnLeft} />
+                        <Btn text="Mandar" color="#43B1B1" width={widthBtnLeft} onClick={AssincPost} />
 
 
                     </div>
@@ -554,8 +646,10 @@ function LoginDataSection() {
     );
 }
 
+
 function CreateACount() {
     const [createCoute, setCreateCoute] = useState('userData');
+
 
 
     const proceedToLoginData = () => {
@@ -567,8 +661,8 @@ function CreateACount() {
             {createCoute === "userData" ? (
                 <UserDataSection proceedToLoginData={proceedToLoginData} />
             ) : (
-                    <LoginDataSection />
-                )}
+                <LoginDataSection />
+            )}
         </>
     );
 }
