@@ -1,4 +1,25 @@
-import React, { useState } from "react";
+
+   // {
+        //     "id_professor": 1,
+        //     "nome": "John Doe",
+        //     "email": "john@example.com",
+        //     "cpf": "123.456.789-00",
+        //     "data_nascimento": "1990-01-15",
+        //     "foto": "https://example.com/john.jpg",
+        //     "senha": "hashed_password",
+        //     "id_genero": 1
+        // },
+        // {
+        //     "id_professor": 2,
+        //     "nome": "Jane Smith",
+        //     "email": "jane@example.com",
+        //     "cpf": "987.654.321-00",
+        //     "data_nascimento": "1985-05-20",
+        //     "foto": "https://example.com/jane.jpg",
+        //     "senha": "hashed_password",
+        //     "id_genero": 2
+        // }
+import React, { useState, useEffect} from "react";
 import Btn from '../layout/FormComponents/Btn';
 import HeaderLogin from '../layout/FormComponents/HeaderLogin';
 import RegistrationInstructions from '../layout/FormComponents/RegistrationInstructions';
@@ -11,8 +32,10 @@ interface UserDataSectionProps {
 
 }
 
-function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
+function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     const [userDataComplete, setUserDataComplete] = useState(false);
+    const [isValidCep, setIsValidCep] = useState(false);
+
     const checkUserDataCompletion = () => {
         if (
             nome &&
@@ -25,39 +48,80 @@ function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
             estado &&
             numero
         ) {
-            return(proceedToLoginData)
-            
+            proceedToLoginData();
+
         } else {
-           console.log("Preencha todos os campos")
+            console.log("Preencha todos os campos")
         }
     };
-    const handleInputChange = (field: string, value:string) => {
-        // Atualize o estado do campo correspondente
-        if (field === "nome") setNome(value);
-        else if (field === "sexo") setSexo(value);
-        else if (field === "cpf") setCpf(value);
-        else if (field === "dataNascimento") setCpf(value);
-        else if (field === "cep") setCep(value);
-        else if (field === "endereco") setEndereco(value);
-        else if (field === "bairro") setBairro(value);
-        else if (field === "estado") setEstado(value);
-        else if (field === "numero") setNumero(value);
-        // ... e assim por diante
-    
-        // Verifique se todos os campos estão preenchidos
-        checkUserDataCompletion();
+    const handleInputClick = async() => {
+        // validateCepLength()
+        // Call the function to handle input changes here
+        // Example: handleInputChange("nome", "John");
+        checkUserDataCompletion(); // Validate the inputs
+        
     };
-    
+
+
+
 
     const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newCep = e.target.value; // Obtém o novo valor do CEP
         const numericCep = newCep.replace(/\D/g, ""); // Remove caracteres não numéricos
-            setCep(numericCep);
-            console.log(cep) 
+    
+        setCep(numericCep);
+        setNumero(numericCep)
+     
+        console.log(cep)
+
+    };
+    const validateCep = async () => {
+
         
+        try {
+            const isValid = await fetchCepData();
+            if (isValid) {
+                console.log("CEP válido");
+                return true;
+            } else {
+                console.log("CEP inválido");
+                return false;
+            }
+        } catch (error) {
+            console.log("Erro ao buscar o endereço:", error);
+            return false;
+        }
     };
 
-    const validateCepLength = () =>{}
+    const fetchCepData = async () => {
+        const apiUrl = `http://localhost:3001/api/cep/${cep}`;
+        try {
+            const response = await fetch(apiUrl);
+    
+            if (response.ok) {
+                const data = await response.json();
+                if (!data.erro) {
+                    console.log(data);
+                    setBairro(data.bairro);
+                    setEstado(data.uf);
+                    setEndereco(data.logradouro)
+                    return true; // CEP is valid
+                } else {
+                    console.log("CEP inválido: Ocorreu um erro ao buscar dados do ViaCEP.");
+                    return false; // CEP is invalid
+                }
+            } else {
+                console.log("CEP inválido: Ocorreu um erro na requisição.");
+                return false; // CEP is invalid due to request error
+            }
+        } catch (error) {
+            console.log("Erro ao buscar o endereço:", error);
+            return false; // CEP is invalid due to error
+        }
+    };
+    
+    
+
 
     const heightInput: string = '4vh';
     const heightButton: string = '6.5vh';
@@ -78,7 +142,11 @@ function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
     const [bairro, setBairro] = useState("");
     const [estado, setEstado] = useState("");
     const [numero, setNumero] = useState("");
-
+    useEffect(() => {
+        if (cep) {
+            validateCep();
+        }
+    }, [cep]);
     const clearInputs = () => {
         setNome(""); // Limpa o conteúdo do input nome
         // Limpar outros estados, se necessário
@@ -206,17 +274,17 @@ function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
                         // backgroundColor: 'red'
                     }}
                 >
-                                    <Input
-                    text="CEP"
-                    width={userProfile}
-                    height={heightInput}
-                    value={cep} // Fornecer o valor do estado
-                    onChange={handleCepChange}
+                    <Input
+                        text="CEP"
+                        width={userProfile}
+                        height={heightInput}
+                        value={cep} // Fornecer o valor do estado
+                        onChange={handleCepChange}
 
-                />
+                    />
                     <Input
                         text="Endereco"
-                         width={userProfile}
+                        width={userProfile}
                         height={heightInput}
                         value={endereco} // Fornecer o valor do estado
                         onChange={(e) => setEndereco(e.target.value)}
@@ -246,7 +314,7 @@ function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
                         value={estado} // Fornecer o valor do estado
                         onChange={(e) => setEstado(e.target.value)}
                     />
-                   <Input
+                    <Input
                         text="Bairro"
                         width={widthInputfullAddress}
                         height={heightInput}
@@ -272,7 +340,7 @@ function UserDataSection({ proceedToLoginData}: UserDataSectionProps) {
 
                 }}>
                     <Btn text="Limpar" color="#F0754E" width={widthBtnRigth} onClick={clearInputs} />
-                    <Btn onClick={proceedToLoginData} text="Avança para schoolData" color="#43B1B1" width={widthBtnLeft}  />
+                    <Btn onClick={handleInputClick} text="Avança para schoolData" color="#43B1B1" width={widthBtnLeft} />
 
 
                 </div>
@@ -386,13 +454,13 @@ function LoginDataSection() {
                             />
                         ) : (
 
-                            <img
-                                src={GetImage}
-                                alt="Descrição da imagem"
-                                style={{ width: '30%', height: '30%' }}
-                            />
+                                <img
+                                    src={GetImage}
+                                    alt="Descrição da imagem"
+                                    style={{ width: '30%', height: '30%' }}
+                                />
 
-                        )}
+                            )}
                     </div>
 
                     <input
@@ -498,9 +566,9 @@ function CreateACount() {
         <>
             {createCoute === "userData" ? (
                 <UserDataSection proceedToLoginData={proceedToLoginData} />
-            ) :(
-                <LoginDataSection />
-            )}
+            ) : (
+                    <LoginDataSection />
+                )}
         </>
     );
 }
