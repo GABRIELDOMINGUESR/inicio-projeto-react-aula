@@ -51,6 +51,7 @@ import ResetPassword from './components/pages/ResetPassword';
 import Test from './components/pages/Test'
 import Test2 from './components/pages/Test2'
 import CreateACount from './components/pages/CreateACount'
+import CreateACountReactHook from './components/pages/CreateACountReactHook'
 
 function App() {
   const divStyle: React.CSSProperties = {
@@ -89,6 +90,8 @@ function App() {
           <Route path="/createacount" element={<CreateACount/>} />
           <Route path="/test" element={<Test/>} />
           <Route path="/test2" element={<Test2/>} />
+          <Route path="/createacsountreacthook" element={<CreateACountReactHook/>} />
+
           
         </Routes>
       </Router>
