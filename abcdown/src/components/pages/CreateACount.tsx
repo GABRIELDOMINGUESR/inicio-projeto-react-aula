@@ -73,43 +73,43 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   // const [userDataComplete, setUserDataComplete] = useState(false);
   const [isValidCep, setIsValidCep] = useState(false);
 
-const checkUserDataCompletion = () => {
-  if (
-    nome &&
-    sexo &&
-    cpf &&
-    dataNascimento &&
-    cep &&
-    endereco &&
-    bairro &&
-    estado &&
-    numero
-  ) {
-    const userData: UserData = {
-      nome,
-      sexo,
-      cpf,
-      dataNascimento,
-      cep,
-      endereco,
-      bairro,
-      estado,
-      numero,
-    };
+  const checkUserDataCompletion = () => {
+    if (
+      nome &&
+      sexo &&
+      cpf &&
+      dataNascimento &&
+      cep &&
+      endereco &&
+      bairro &&
+      estado &&
+      numero
+    ) {
+      const userData: UserData = {
+        nome,
+        sexo,
+        cpf,
+        dataNascimento,
+        cep,
+        endereco,
+        bairro,
+        estado,
+        numero,
+      };
 
-    const professorData = {
-      ...userData,
-      email: "", // Fill in the email value
-      password: "", // Fill in the password value
-      photo: "", // Fill in the photo value
-    };
+      const professorData = {
+        ...userData,
+        email: "", // Fill in the email value
+        password: "", // Fill in the password value
+        photo: "", // Fill in the photo value
+      };
 
-    proceedToLoginData(professorData);
-    console.log(professorData);
-  } else {
-    console.log("Preencha todos os campos");
-  }
-};
+      proceedToLoginData(professorData);
+      console.log(professorData);
+    } else {
+      console.log("Preencha todos os campos");
+    }
+  };
 
   const handleInputClick = async () => {
     // validateCepLength()
@@ -509,65 +509,25 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%",
-        backgroundColor: "white",
-      }}
-    >
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", backgroundColor: "white", }}>
       <HeaderLogin />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "max-content",
-          // alignItems: 'center',
-          // justifyContent:'center'
-        }}
-      >
+      <div style={{
+        display: "flex", flexDirection: "column", width: "max-content",// alignItems: 'center',// justifyContent:'center'
+      }}>
         <RegistrationInstructions
           textTitulo="Crie uma conta agora!"
           textDescription="Estamos quase lá!
         Preencha o restante das suas informações para finalizarmos"
         />
 
-        <span
-          style={{
-            fontWeight: "bold",
-            fontSize: "1vw",
-            marginTop: "4%",
-          }}
-        >
+        <span style={{ fontWeight: "bold", fontSize: "1vw", marginTop: "4%", }}>
           Parte 3
         </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            backgroundColor: "white",
-          }}
-        >
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", backgroundColor: "white", }}>
           {/* ... Rest of your code ... */}
 
-          <div
-            style={{
-              height: "30vh",
-              width: "20vw",
-              borderRadius: "30px",
-              border: "3px solid #EAEAEA",
-              backgroundColor: "#F5F5F5",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onClick={handleDivClick}
-          >
+          <div style={{ height: "30vh", width: "20vw", borderRadius: "30px", border: "3px solid #EAEAEA", backgroundColor: "#F5F5F5", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", }}
+            onClick={handleDivClick}>
             {selectedPhoto ? (
               <img
                 src={selectedPhoto}
@@ -575,65 +535,26 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             ) : (
-              <img
-                src={GetImage}
-                alt="Descrição da imagem"
-                style={{ width: "30%", height: "30%" }}
-              />
+              <img src={GetImage} alt="Descrição da imagem" style={{ width: "30%", height: "30%" }} />
             )}
           </div>
 
           <input
-            type="file"
-            id="hiddenFileInput"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handlePhotoChange}
+            type="file" id="hiddenFileInput" accept="image/*" style={{ display: "none" }} onChange={handlePhotoChange}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "5% 0 7% 0",
-              gap: "2vh",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-                // backgroundColor: 'red'
-              }}
-            >
-              <Input
-                text="E-mail*"
-                width={widthInputleft}
-                height={heightInput}
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                text="Senha*"
-                width={widthInputright}
-                height={heightInput}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+          <div style={{ display: "flex", flexDirection: "column", padding: "5% 0 7% 0", gap: "2vh", }}>
+            <div style={{
+              display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%",
+              // backgroundColor: 'red'
+            }}>
+              <Input text="E-mail*" width={widthInputleft} height={heightInput} type="email" onChange={(e) => setEmail(e.target.value)} />
+              <Input text="Senha*" width={widthInputright} height={heightInput} type="password" onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-                // backgroundColor: 'red'
-              }}
-            >
+            <div style={{
+              display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%",
+              // backgroundColor: 'red'
+            }}>
               <Input
                 text="Confirmação do e-mail*"
                 width={widthInputleft}
@@ -641,13 +562,7 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
                 type="email"
                 onChange={(e) => setComfirmEmail(e.target.value)}
               />
-              <Input
-                text="Confirmação de senha*"
-                width={widthInputright}
-                height={heightInput}
-                type="password"
-                onChange={(e) => setComfirmPassword(e.target.value)}
-              />
+              <Input text="Confirmação de senha*" width={widthInputright} height={heightInput} type="password" onChange={(e) => setComfirmPassword(e.target.value)} />
             </div>
           </div>
 
@@ -680,7 +595,7 @@ function CreateACount() {
   const proceedToLoginData = (userData: UserData) => {
     setUserData(userData); // Set the userData received from UserDataSection
     setCreateCoute("loginData");
-    
+
   };
 
   return (
@@ -688,7 +603,7 @@ function CreateACount() {
       {createCoute === "userData" ? (
         <UserDataSection proceedToLoginData={proceedToLoginData} />
       ) : (
-        <LoginDataSection userData={userData} /> 
+        <LoginDataSection userData={userData} />
       )}
     </>
   );

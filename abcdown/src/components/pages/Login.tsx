@@ -10,11 +10,16 @@ import ImageGoogle from '../layout/loginImages/Google.png';
 import { useState, useEffect } from 'react';
 import AuthenticationOptions from '../layout/FormComponents/AuthenticationOptions'
 import UserDecisionHandler from '../layout/FormComponents/UserDecisionHandler'
+
 function Login() {
   const heightInput: string = '5vh';
   const heightButton: string = '6.5vh';
   const widthInput: string = '35vw';
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  
+  
   const leftSideContent = (
     <>
       <HeaderLogin />
@@ -82,21 +87,15 @@ function Login() {
             gap:'2vh'
 
           }}>
-            <Input text="Email" width={widthInput} height={heightInput} />
-            <Input text="Senha:" width={widthInput} height={heightInput} />
+            <Input text="Email" width={widthInput} height={heightInput} onChange={(e) => setEmail(e.target.value)} />
+            <Input text="Senha:" width={widthInput} height={heightInput} onChange={(e) => setPassword(e.target.value)}/>
           </div>
           <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
+            style={{display: 'flex',flexDirection: 'column',alignItems: 'center',justifyContent: 'center',
               // backgroundColor: 'yellow',
               height: 'max-content',
               width: 'max-content',
-              gap: '2vh'
-
-            }}
+              gap: '2vh'}}
           >
             <Btn text="entrar" color="#43B1B1" width={widthInput} height={heightButton} />
 
