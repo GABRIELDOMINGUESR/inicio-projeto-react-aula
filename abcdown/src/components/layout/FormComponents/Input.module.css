@@ -23,3 +23,7 @@
     line-height: 24px;
     
 }
+.messageError{
+  color: #E74747;
+font-size: 0.7vw;
+}

@@ -6,8 +6,10 @@ interface InputProps {
     width?: string;
     height?: string;
     type?: string;
-    value?: string; // Adicione a propriedade value para o valor do input
+    value?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    messageError?: string;
+    disabled?: boolean; // Adicione a propriedade disabled
 }
 
 function Input(props: InputProps) {
@@ -19,18 +21,21 @@ function Input(props: InputProps) {
     return (
         <div className={styles.inputContainer}>
             <span className={styles.textTitle}>{props.text}</span>
-            <input
-                className={`${styles.inputField} ${styles.inputWithImage}`}
-                type={props.type}
-                style={{
-                    ...inputStyle,
-                }}
-                value={props.value} // Use o valor da propriedade value
-                onChange={props.onChange}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>          
+                <input
+                    className={`${styles.inputField} ${styles.inputWithImage}`}
+                    type={props.type}
+                    style={{
+                        ...inputStyle,
+                    }}
+                    value={props.value}
+                    onChange={props.onChange}
+                    disabled={props.disabled} // Use a propriedade disabled para bloquear a digitação
+                />
+                <span className={styles.messageError}>{props.messageError}</span>
+            </div>
         </div>
     );
 }
-
 
 export default Input;

@@ -1,23 +1,3 @@
-// {
-//     "id_professor": 1,
-//     "nome": "John Doe",
-//     "email": "john@example.com",
-//     "cpf": "123.456.789-00",
-//     "data_nascimento": "1990-01-15",
-//     "foto": "https://example.com/john.jpg",
-//     "senha": "hashed_password",
-//     "id_genero": 1
-// },
-// {
-//     "id_professor": 2,
-//     "nome": "Jane Smith",
-//     "email": "jane@example.com",
-//     "cpf": "987.654.321-00",
-//     "data_nascimento": "1985-05-20",
-//     "foto": "https://example.com/jane.jpg",
-//     "senha": "hashed_password",
-//     "id_genero": 2
-// }
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +6,8 @@ import HeaderLogin from "../layout/FormComponents/HeaderLogin";
 import RegistrationInstructions from "../layout/FormComponents/RegistrationInstructions";
 import Input from "../layout/FormComponents/Input";
 import GetImage from "../layout/FormComponents/imageGetImage/getImage.svg";
+import CustomDiv from '../layout/FormComponents/CustomDiv'
+import CustomDivInpuMessageError from '../layout/FormComponents/CustomDivInpuMessageError'
 
 interface UserDataSectionProps {
   proceedToLoginData: (userData: UserData) => void;
@@ -48,11 +30,13 @@ interface Option {
   nome_genero: string;
 }
 function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
+
+
   const heightInput: string = "4vh";
   const heightButton: string = "6.5vh";
-  const widthInputleft: string = "27vw";
+  const widthInputleft: string = "28vw";
+  const widthInputright: string = "18vw";
   const widthInputfullAddress: string = "15vw";
-  const widthInputright: string = "15vw";
   const userProfile: string = "23vw";
 
   const widthBtnRigth: string = "15vw";
@@ -70,21 +54,59 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   const [bairro, setBairro] = useState("");
   const [estado, setEstado] = useState("");
   const [numero, setNumero] = useState("");
-  // const [userDataComplete, setUserDataComplete] = useState(false);
-  const [isValidCep, setIsValidCep] = useState(false);
+  const [isNomeVazio, setIsNomeVazio] = useState(false);
+  const [isSexoVazio, setIsSexoVazio] = useState(false);
+  const [isCpfVazio, setIsCpfVazio] = useState(false);
+  const [IsDataNascimentoVazio, setIsDataNascimentoVazio] = useState(false);
+  const [isTelefoneVazio, setIsTelefoneVazio] = useState(false);
+  const [isCepVazio, setIsCepVazio] = useState(false);
+  const [isCepInvalid, setIsCepInvalid] = useState(false);
+
 
   const checkUserDataCompletion = () => {
-    if (
-      nome &&
-      sexo &&
-      cpf &&
-      dataNascimento &&
-      cep &&
-      endereco &&
-      bairro &&
-      estado &&
-      numero
-    ) {
+    let hasError = false;
+
+    if (!nome) {
+      setIsNomeVazio(true);
+      hasError = true;
+    } else {
+      setIsNomeVazio(false);
+    }
+
+    if (!sexo) {
+      setIsSexoVazio(true);
+      hasError = true;
+    } else {
+      setIsSexoVazio(false);
+    }
+
+    if (!cpf) {
+      setIsCpfVazio(true);
+      hasError = true;
+    } else {
+      setIsCpfVazio(false);
+    }
+
+    if (!dataNascimento) {
+      setIsDataNascimentoVazio(true);
+      hasError = true;
+    } else {
+      setIsDataNascimentoVazio(false);
+    }
+
+    if (!cep) {
+      setIsCepVazio(true);
+      hasError = true;
+    } else {
+      setIsCepVazio(false);
+    }
+
+
+
+    // Continue verificando outros campos conforme necessário
+
+    if (!hasError) {
+      // Nenhum erro encontrado, proceda com o envio dos dados
       const userData: UserData = {
         nome,
         sexo,
@@ -96,26 +118,26 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
         estado,
         numero,
       };
-
       const professorData = {
         ...userData,
-        email: "", // Fill in the email value
-        password: "", // Fill in the password value
-        photo: "", // Fill in the photo value
+        email: "", // Preencha com o valor do email
+        password: "", // Preencha com o valor da senha
+        photo: "", // Preencha com o valor da foto
       };
-
       proceedToLoginData(professorData);
-      console.log(professorData);
-    } else {
-      console.log("Preencha todos os campos");
     }
   };
+
 
   const handleInputClick = async () => {
     // validateCepLength()
     // Call the function to handle input changes here
     // Example: handleInputChange("nome", "John");
-    checkUserDataCompletion(); // Validate the inputs
+    
+     const isCepValid = await validateCep(); // Valide o CEP antes de prosseguir
+     if (isCepValid) {
+       checkUserDataCompletion();  // Validate the inputs
+     }
   };
 
   const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,12 +151,14 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   const validateCep = async () => {
     try {
       const isValid = await fetchCepData();
-      if (isValid) {
-        console.log("CEP válido");
-        return true;
-      } else {
+      if (!isValid) {
         console.log("CEP inválido");
+        setIsCepInvalid(true); // Defina como true para indicar CEP inválido
         return false;
+      } else {
+        console.log("CEP válido");
+        setIsCepInvalid(false);
+        return true;
       }
     } catch (error) {
       console.log("Erro ao buscar o endereço:", error);
@@ -234,8 +258,6 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
           flexDirection: "column",
           gap: "1.5vh",
           width: "max-content",
-          // alignItems: 'center',
-          // justifyContent:'center'
         }}
       >
         <div
@@ -263,115 +285,128 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
         >
           Parte 1
         </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            // backgroundColor: 'red'
-          }}
-        >
-          <Input
-            text="nome"
-            width={widthInputleft}
-            height={heightInput}
-            value={nome} // Fornecer o valor do estado
-            onChange={(e) => setNome(e.target.value)}
-          />
 
-          {/* <Input
+        <CustomDiv>
+          <CustomDivInpuMessageError>
+            <Input
+              text="nome"
+              width={widthInputleft}
+              height={heightInput}
+              value={nome} // Fornecer o valor do estado
+              onChange={(e) => {
+                setNome(e.target.value);
+                setIsNomeVazio(false); // Remove a mensagem de erro ao começar a digitar
+              }}
+            />
+            {isNomeVazio && <span style={{ color: "red" }}>Nome é obrigatório</span>}
+            {/* <Input
                         text="sexo"
                         width={widthInputright}
                         height={heightInput}
                         value={sexo} // Fornecer o valor do estado
                         onChange={(e) => setSexo(e.target.value)}
                     /> */}
+          </CustomDivInpuMessageError>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <label>Sexo:</label>
-            <select
-              onChange={(e) => setSexo(e.target.value)}
+          <CustomDivInpuMessageError>
+            <div
               style={{
-                width: widthInputright,
-                height: heightInput,
-                borderRadius: "40px",
-                borderColor: "#C9C9C9",
-                borderWidth: "1px",
-                borderStyle: "solid",
-                outline: "none",
-                paddingLeft: "10px",
-                lineHeight: "24px",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              <option value=""></option>
-              {options.map((option) => (
-                <option key={option.id_genero} value={option.nome_genero}>
-                  {option.nome_genero}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            // backgroundColor: 'red'
-          }}
-        >
-          <Input
-            text="cpf"
-            width={userProfile}
-            height={heightInput}
-            value={cpf} // Fornecer o valor do estado
-            onChange={(e) => setCpf(e.target.value)}
-          />
+              <label>Sexo:</label>
+              <select
+                onChange={(e) => {
+                  setSexo(e.target.value);
+                  setIsSexoVazio(false); // Remove a mensagem de erro ao começar a digitar
+                }}
 
-          <Input
-            text="data nascimento"
-            width={userProfile}
-            height={heightInput}
-            value={dataNascimento} // Fornecer o valor do estado
-            onChange={(e) => setDataNascimento(e.target.value)}
-            type="date"
-          />
-        </div>
+                style={{
+                  width: widthInputright,
+                  height: heightInput,
+                  borderRadius: "40px",
+                  borderColor: "#C9C9C9",
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                  outline: "none",
+                  paddingLeft: "10px",
+                  lineHeight: "24px",
+                }}
+              >
+                <option value=""></option>
+                {options.map((option) => (
+                  <option key={option.id_genero} value={option.nome_genero}>
+                    {option.nome_genero}
+                  </option>
+                ))}
+              </select>
+              {isSexoVazio && <span style={{ color: "red" }}>Sexo é obrigatório</span>}
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            // backgroundColor: 'red'
-          }}
-        >
-          <Input
-            text="CEP"
-            width={userProfile}
-            height={heightInput}
-            value={cep} // Fornecer o valor do estado
-            onChange={handleCepChange}
-          />
+            </div>
+          </CustomDivInpuMessageError>
+
+        </CustomDiv>
+        <CustomDiv>
+          <CustomDivInpuMessageError>
+            <Input
+              text="CPF"
+              width={userProfile}
+              height={heightInput}
+              value={cpf}
+              onChange={(e) => {
+                setCpf(e.target.value);
+                setIsCpfVazio(false);
+              }}
+            />
+            {isCpfVazio && <span style={{ color: "red" }}>Cpf é obrigatório</span>}
+
+          </CustomDivInpuMessageError>
+
+          <CustomDivInpuMessageError>
+            <Input
+              text="Data Nascimento"
+              width={userProfile}
+              height={heightInput}
+              value={dataNascimento} // Fornecer o valor do estado
+              onChange={(e) => { setDataNascimento(e.target.value); setIsDataNascimentoVazio(false) }}
+              type="date"
+            />
+            {IsDataNascimentoVazio && <span style={{ color: "red" }}>Data de Nascimento é obrigatório</span>}
+
+          </CustomDivInpuMessageError>
+
+        </CustomDiv>
+
+        <CustomDiv>
+          <CustomDivInpuMessageError>
+            <Input
+              text="CEP"
+              width={widthInputright}
+              height={heightInput}
+              value={cep}
+              onChange={(e) => {
+                handleCepChange(e);
+                setIsCpfVazio(false);
+                setIsCepInvalid(false)
+              }}
+            />
+            {isCepVazio && <span style={{ color: "red" }}>Cep é obrigatório</span>}
+            {isCepInvalid && <span style={{ color: "red" }}>Cep invalido</span>}
+
+
+          </CustomDivInpuMessageError>
+
+
           <Input
             text="Endereco"
-            width={userProfile}
+            width={widthInputleft}
             height={heightInput}
             value={endereco} // Fornecer o valor do estado
+            disabled={true}
             onChange={(e) => setEndereco(e.target.value)}
           />
-        </div>
+        </CustomDiv>
 
         <div
           style={{
@@ -389,6 +424,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             width={widthInputfullAddress}
             height={heightInput}
             value={estado} // Fornecer o valor do estado
+            disabled={true}
             onChange={(e) => setEstado(e.target.value)}
           />
           <Input
@@ -396,6 +432,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             width={widthInputfullAddress}
             height={heightInput}
             value={bairro} // Fornecer o valor do estado
+            disabled={true}
             onChange={(e) => setBairro(e.target.value)}
           />
 
@@ -407,15 +444,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             onChange={(e) => setNumero(e.target.value)}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            // backgroundColor: 'black',
-            justifyContent: "space-between",
-            flexDirection: "row",
-            width: "100%",
-          }}
-        >
+        <CustomDiv>
           <Btn
             text="Limpar"
             color="#F0754E"
@@ -428,7 +457,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
             color="#43B1B1"
             width={widthBtnLeft}
           />
-        </div>
+        </CustomDiv>
       </div>
     </div>
   );
@@ -535,26 +564,20 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             ) : (
-              <img src={GetImage} alt="Descrição da imagem" style={{ width: "30%", height: "30%" }} />
-            )}
+                <img src={GetImage} alt="Descrição da imagem" style={{ width: "30%", height: "30%" }} />
+              )}
           </div>
 
           <input
             type="file" id="hiddenFileInput" accept="image/*" style={{ display: "none" }} onChange={handlePhotoChange}
           />
           <div style={{ display: "flex", flexDirection: "column", padding: "5% 0 7% 0", gap: "2vh", }}>
-            <div style={{
-              display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%",
-              // backgroundColor: 'red'
-            }}>
+            <CustomDiv>
               <Input text="E-mail*" width={widthInputleft} height={heightInput} type="email" onChange={(e) => setEmail(e.target.value)} />
               <Input text="Senha*" width={widthInputright} height={heightInput} type="password" onChange={(e) => setPassword(e.target.value)} />
-            </div>
+            </CustomDiv>
 
-            <div style={{
-              display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%",
-              // backgroundColor: 'red'
-            }}>
+            <CustomDiv>
               <Input
                 text="Confirmação do e-mail*"
                 width={widthInputleft}
@@ -563,18 +586,10 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
                 onChange={(e) => setComfirmEmail(e.target.value)}
               />
               <Input text="Confirmação de senha*" width={widthInputright} height={heightInput} type="password" onChange={(e) => setComfirmPassword(e.target.value)} />
-            </div>
+            </CustomDiv>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              // backgroundColor: 'black',
-              justifyContent: "space-between",
-              flexDirection: "row",
-              width: "100%",
-            }}
-          >
+          <CustomDiv>
             <Btn text="Voltar" color="#F0754E" width={widthBtnRigth} />
             <Btn
               text="Mandar"
@@ -582,7 +597,7 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
               width={widthBtnLeft}
               onClick={CreatePost}
             />
-          </div>
+          </CustomDiv>
         </div>
       </div>
     </div>
@@ -603,8 +618,8 @@ function CreateACount() {
       {createCoute === "userData" ? (
         <UserDataSection proceedToLoginData={proceedToLoginData} />
       ) : (
-        <LoginDataSection userData={userData} />
-      )}
+          <LoginDataSection userData={userData} />
+        )}
     </>
   );
 }
