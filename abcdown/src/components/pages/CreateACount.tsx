@@ -8,7 +8,9 @@ import Input from "../layout/FormComponents/Input";
 import GetImage from "../layout/FormComponents/imageGetImage/getImage.svg";
 import CustomDiv from '../layout/FormComponents/CustomDiv'
 import CustomDivInpuMessageError from '../layout/FormComponents/CustomDivInpuMessageError'
-
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from "../../firebase";
+import { url } from "inspector";
 
 interface UserDataSectionProps {
   proceedToLoginData: (userData: UserData) => void;
@@ -487,6 +489,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   );
 }
 
+
 function LoginDataSection({ userData }: { userData: UserData | null }) {
   const heightInput: string = "4vh";
   const heightButton: string = "6.5vh";
@@ -521,19 +524,60 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
       //estado: userData?.estado || "",
     },
   };
+  // const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const storageRef = ref(storage,`images/${file.name}`)
+  //     const uploadTask = uploadBytesResumable(storageRef,file)
+  //     uploadTask.on(
+  //       "state_changed",
+  //       snapshot => {
+  //         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //         setProgress(progress)
+  //       },
+  //       error => {
+  //         alert(error)
+  //       },
+  //       () => {
+  //         getDowloadURL(uploadTask.snapshot.ref).then(url => {
+  //           selectedPhoto(url)
+  //         })
+  //       }
+  //     )
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setSelectedPhoto(reader.result as string);
+
+     
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedPhoto(reader.result as string);
-
-     
-      };
-      reader.readAsDataURL(file);
+      const storageRef = ref(storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(progress);
+        },
+        error => {
+          alert(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url: string) => { // Add type annotation here
+            setSelectedPhoto(url); // Assuming setSelectedPhoto is a function to set the selected photo URL
+          });
+        }
+      );
     }
   };
-
+  
   const navigate = useNavigate();
   function CreatePost() {
     // professor.cost = 0
@@ -601,6 +645,8 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
           <input
             type="file" id="hiddenFileInput" accept="image/*" style={{ display: "none" }} onChange={handlePhotoChange}
           />
+
+{selectedPhoto && <progress value={progress} max='100'/>}
           <div style={{ display: "flex", flexDirection: "column", padding: "5% 0 7% 0", gap: "2vh", }}>
             <CustomDiv>
               <Input text="E-mail*" width={widthInputleft} height={heightInput} type="email" onChange={(e) => setEmail(e.target.value)} />
