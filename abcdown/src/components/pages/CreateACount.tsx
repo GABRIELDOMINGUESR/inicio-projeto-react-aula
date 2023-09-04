@@ -708,6 +708,7 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
 
             <CustomDiv>
               <CustomDivInpuMessageError>
+                
                 <Input
                   text="Confirmação do e-mail*"
                   width={widthInputleft}
