@@ -9,20 +9,22 @@ import GetImage from "../layout/FormComponents/imageGetImage/getImage.svg";
 import CustomDiv from '../layout/FormComponents/CustomDiv'
 import CustomDivInpuMessageError from '../layout/FormComponents/CustomDivInpuMessageError'
 
+
 interface UserDataSectionProps {
   proceedToLoginData: (userData: UserData) => void;
 }
 
 interface UserData {
   nome: string;
-  sexo: string;
   cpf: string;
   dataNascimento: string;
-  cep: string;
-  endereco: string;
-  bairro: string;
-  estado: string;
+  sexo: string;
+  endereco?: string;
+  bairro?: string;
+  estado?: string;
   numero: string;
+  cep: string;
+  numeroTelefone:string
 }
 
 interface Option {
@@ -54,11 +56,12 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   const [bairro, setBairro] = useState("");
   const [estado, setEstado] = useState("");
   const [numero, setNumero] = useState("");
+  const [numeroTelefone, setNumeroTelefone] = useState("");
   const [isNomeVazio, setIsNomeVazio] = useState(false);
   const [isSexoVazio, setIsSexoVazio] = useState(false);
   const [isCpfVazio, setIsCpfVazio] = useState(false);
   const [IsDataNascimentoVazio, setIsDataNascimentoVazio] = useState(false);
-  const [isTelefoneVazio, setIsTelefoneVazio] = useState(false);
+  const [isNumeroTelefoneVazio, setIsNumeorTelefoneVazio] = useState(false);
   const [isCepVazio, setIsCepVazio] = useState(false);
   const [isCepInvalid, setIsCepInvalid] = useState(false);
 
@@ -69,6 +72,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     if (!nome) {
       setIsNomeVazio(true);
       hasError = true;
+      console.log('nome')
     } else {
       setIsNomeVazio(false);
     }
@@ -90,7 +94,12 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     if (!dataNascimento) {
       setIsDataNascimentoVazio(true);
       hasError = true;
-    } else {
+    } 
+    if(!numeroTelefone) {
+      setIsNumeorTelefoneVazio(true);
+      hasError= true
+    }
+    else {
       setIsDataNascimentoVazio(false);
     }
 
@@ -109,14 +118,15 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
       // Nenhum erro encontrado, proceda com o envio dos dados
       const userData: UserData = {
         nome,
-        sexo,
         cpf,
         dataNascimento,
-        cep,
-        endereco,
+        //endereco,
         bairro,
         estado,
+        sexo,
         numero,
+        cep,
+        numeroTelefone
       };
       const professorData = {
         ...userData,
@@ -135,9 +145,9 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     // Example: handleInputChange("nome", "John");
     
      const isCepValid = await validateCep(); // Valide o CEP antes de prosseguir
-     if (isCepValid) {
+    // if (isCepValid) {
        checkUserDataCompletion();  // Validate the inputs
-     }
+    // }
   };
 
   const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -206,6 +216,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     setSexo("");
     setCpf("");
     setDataNascimento("");
+    setNumeroTelefone("")
     setCep("");
     setEndereco("");
     setBairro("");
@@ -234,6 +245,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     nome: nome,
     cpf: cpf,
     dataNascimento: dataNascimento,
+    numeroTelefone: numeroTelefone,
     cep: cep,
     endereco: endereco,
     bairro: bairro,
@@ -336,7 +348,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
               >
                 <option value=""></option>
                 {options.map((option) => (
-                  <option key={option.id_genero} value={option.nome_genero}>
+                  <option key={option.id_genero} value={option.id_genero}>
                     {option.nome_genero}
                   </option>
                 ))}
@@ -351,7 +363,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
           <CustomDivInpuMessageError>
             <Input
               text="CPF"
-              width={userProfile}
+              width={widthInputfullAddress}
               height={heightInput}
               value={cpf}
               onChange={(e) => {
@@ -366,13 +378,25 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
           <CustomDivInpuMessageError>
             <Input
               text="Data Nascimento"
-              width={userProfile}
+              width={widthInputfullAddress}
               height={heightInput}
               value={dataNascimento} // Fornecer o valor do estado
               onChange={(e) => { setDataNascimento(e.target.value); setIsDataNascimentoVazio(false) }}
               type="date"
             />
-            {IsDataNascimentoVazio && <span style={{ color: "red" }}>Data de Nascimento é obrigatório</span>}
+            {IsDataNascimentoVazio && <span style={{ color: "red" }}>Data é obrigatório</span>}
+
+          </CustomDivInpuMessageError>
+          <CustomDivInpuMessageError>
+            <Input
+              text="Telefone"
+              width={widthInputfullAddress}
+              height={heightInput}
+              value={numeroTelefone} // Fornecer o valor do estado
+              onChange={(e) => { setNumeroTelefone(e.target.value); setIsNumeorTelefoneVazio(false) }}
+           
+            />
+            {isNumeroTelefoneVazio && <span style={{ color: "red" }}>Telefone é obrigatório</span>}
 
           </CustomDivInpuMessageError>
 
@@ -392,7 +416,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
               }}
             />
             {isCepVazio && <span style={{ color: "red" }}>Cep é obrigatório</span>}
-            {isCepInvalid && <span style={{ color: "red" }}>Cep invalido</span>}
+            {/* {isCepInvalid && <span style={{ color: "red" }}>Cep invalido</span>} */}
 
 
           </CustomDivInpuMessageError>
@@ -478,21 +502,23 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
   const [password, setPassword] = useState("");
   const [confirmEmail, setComfirmEmail] = useState("");
   const [comfirmpassword, setComfirmPassword] = useState("");
+  const [progress,setProgress] = useState(0)
 
   const requestData = {
     professor: {
-      email: email,
-      password: password,
-      photo: selectedPhoto,
       nome: userData?.nome || "",
-      sexo: userData?.sexo || "",
       cpf: userData?.cpf || "",
-      dataNascimento: userData?.dataNascimento || "",
-      cep: userData?.cep || "",
-      endereco: userData?.endereco || "",
-      bairro: userData?.bairro || "",
-      estado: userData?.estado || "",
+      data_nascimento: userData?.dataNascimento || "",
+      foto: selectedPhoto,
+      email: email,
+      senha: password,
+      id_genero: userData?.sexo || "",
       numero: userData?.numero || "",
+      cep: userData?.cep || "",
+      numeroTelefone: userData?.numeroTelefone || ""
+      //endereco: userData?.endereco || "",
+     // bairro: userData?.bairro || "",
+      //estado: userData?.estado || "",
     },
   };
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -501,6 +527,8 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
       const reader = new FileReader();
       reader.onload = () => {
         setSelectedPhoto(reader.result as string);
+
+     
       };
       reader.readAsDataURL(file);
     }
@@ -509,7 +537,9 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
   const navigate = useNavigate();
   function CreatePost() {
     // professor.cost = 0
-    // professor.service = []
+    // professor.service = [] 
+
+
 
     fetch("http://localhost:5000/professor", {
       method: "POST",

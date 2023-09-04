@@ -98,6 +98,9 @@ function App() {
     </div>
   );
 }
+//npm install firebase
+// npm install 
+//node server.js
 
 export default App;
 
