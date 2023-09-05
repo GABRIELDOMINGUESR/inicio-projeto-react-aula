@@ -20,13 +20,13 @@ interface UserData {
   nome: string;
   cpf: string;
   dataNascimento: string;
-  sexo: string;
+  nome_genero: string;
   endereco?: string;
   bairro?: string;
   estado?: string;
   numero: string;
   cep: string;
-  numeroTelefone: string
+  numeroProfessor: string
 }
 
 interface Option {
@@ -58,7 +58,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   const [bairro, setBairro] = useState("");
   const [estado, setEstado] = useState("");
   const [numero, setNumero] = useState("");
-  const [numeroTelefone, setNumeroTelefone] = useState("");
+  const [numeroProfessor, setnumeroProfessor] = useState("");
   const [isNomeVazio, setIsNomeVazio] = useState(false);
   const [isSexoVazio, setIsSexoVazio] = useState(false);
   const [isCpfVazio, setIsCpfVazio] = useState(false);
@@ -99,7 +99,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     } else {
       setIsDataNascimentoVazio(false);
     }
-    if (!numeroTelefone) {
+    if (!numeroProfessor) {
       setIsNumeorTelefoneVazio(true);
       hasError = true
     } else {
@@ -127,10 +127,10 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
         //endereco,
         bairro,
         estado,
-        sexo,
+        nome_genero: sexo,
         numero,
         cep,
-        numeroTelefone
+        numeroProfessor: numeroProfessor
       };
       const professorData = {
         ...userData,
@@ -220,7 +220,7 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
     setSexo("");
     setCpf("");
     setDataNascimento("");
-    setNumeroTelefone("");
+    setnumeroProfessor("");
     setCep("");
     setEndereco("");
     setBairro("");
@@ -248,8 +248,8 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
   const userData = {
     nome: nome,
     cpf: cpf,
-    dataNascimento: dataNascimento,
-    numeroTelefone: numeroTelefone,
+    data_nascimento: dataNascimento,
+    numeroProfessor: numeroProfessor,
     cep: cep,
     endereco: endereco,
     bairro: bairro,
@@ -396,8 +396,8 @@ function UserDataSection({ proceedToLoginData }: UserDataSectionProps) {
               text="Telefone"
               width={widthInputfullAddress}
               height={heightInput}
-              value={numeroTelefone} // Fornecer o valor do estado
-              onChange={(e) => { setNumeroTelefone(e.target.value); setIsNumeorTelefoneVazio(false) }}
+              value={numeroProfessor} // Fornecer o valor do estado
+              onChange={(e) => { setnumeroProfessor(e.target.value); setIsNumeorTelefoneVazio(false) }}
 
             />
             {isNumeroTelefoneVazio && <span style={{ color: "red" }}>Telefone é obrigatório</span>}
@@ -520,10 +520,10 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
       foto: selectedPhoto,
       email: email,
       senha: password,
-      id_genero: userData?.sexo || "",
+      id_genero: userData?.nome_genero || "",
       numero: userData?.numero || "",
       cep: userData?.cep || "",
-      numeroTelefone: userData?.numeroTelefone || ""
+      numeroTelefone: userData?.numeroProfessor || ""
       //endereco: userData?.endereco || "",
       // bairro: userData?.bairro || "",
       //estado: userData?.estado || "",
@@ -583,46 +583,33 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
     }
   };
 
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   function CreatePost() {
-    if (email === confirmEmail) {
-      if (password === comfirmpassword) { // Agora você pode usar passwordConfirmPassword aqui
-        // Realize a ação de envio dos dados
-        fetch("http://localhost:5000/professor", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        })
-          .then((resp) => resp.json())
-          .then((data) => {
-            console.log(data);
-            navigate("/login", {
-              state: { message: "usuario criado com sucesso!" },
-            });
-          })
-          .catch((err) => console.log(err));
-      } else {
-        if (password === comfirmpassword) {
-          setErrorMessage(false);
-        } else {
-          // Senha e confirmação de senha não coincidem, exiba uma mensagem de erro
-          setErrorMessage(true);
-          console.log("A senha e a confirmação de senha não coincidem.")
+    fetch("http://localhost:8181/professor/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error(`HTTP error! Status: ${resp.status}`);
         }
-      }
-    } else {
-      // Email e confirmação de email não coincidem, exiba uma mensagem de erro
-      if (email === confirmEmail) {
-        setErrorMessage(false)
-      } else {
-        setErrorMessage(true);
-        console.log("O email e a confirmação de email não coincidem.")
-      }
-
-    }
+        return resp.json();
+      })
+      .then((data) => {
+        console.log(data);
+        navigate("/login", {
+          state: { message: "usuario criado com sucesso!" },
+        });
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        console.log(requestData)
+      });
   }
+  
 
   const checkEmptyInput = () => {
     // Verifique se o campo de email está vazio
@@ -645,6 +632,7 @@ function LoginDataSection({ userData }: { userData: UserData | null }) {
     if (email && password) {
       // Chame a função desejada aqui
       CreatePost();
+      console.log("checkEmptyInput")
     }
   };
 
