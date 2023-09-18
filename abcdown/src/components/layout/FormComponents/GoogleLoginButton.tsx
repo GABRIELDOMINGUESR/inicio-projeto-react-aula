@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from './GoogleLoginButton.module.css';
 
+import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { auth } from '../../../service/firebase';
+
+
 interface GoogleLoginButtonProps {
     text?: string;
     imageSrc?: string;
@@ -14,13 +18,26 @@ function GoogleLoginButton(props: GoogleLoginButtonProps) {
         height: props.height
     };
 
-    return (
-        <div className={styles.inputContainer} style={containerStyle}>
-        
-                <img src={props.imageSrc} alt='' className={styles.image} />
-                <span className={styles.textTitle}>Log in with Google</span>
+    // Função para lidar com o evento de clique
+    function handleButtonClick () {
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+        .then((result)=>{
+            console.log(result);
             
-        </div>
+        })
+        .catch((error)=>{
+            console.log(error);
+            
+        })
+    }
+
+    return (
+        <button className={styles.inputContainer} style={containerStyle} onClick={handleButtonClick}>
+            <img src={props.imageSrc} alt='' className={styles.image} />
+            <span className={styles.textTitle}>Log in with Google</span>
+        </button>
     );
 }
 
